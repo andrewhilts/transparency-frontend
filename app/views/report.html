@@ -12,12 +12,12 @@
 
 	<h3>Publication</h3>
 	<p><label>Publication Date: <input type="date" ng-model="report.publication_date"/></label></p>
-
-	<h3>Components</h3>
-	<p>Clicking these will save your report, and move you to a new page.</p>
-	<p><a ng-click="">Data Retention Guide</a></p>
-	<p><a ng-click="">LEA Handbook</a></p>
-	<p><a ng-click="">Government Requests Report</a></p>
 	<p><button ng-click="save()">Save</button></p>
 	</form>
+	<section ng-if="!isCreating">
+	<h3>Components</h3>
+	<p><a ng-href="{{report.guidePath}}">Data Retention Guide</a></p>
+	<p><a ng-click="">LEA Handbook</a></p>
+	<p><a ng-click="">Government Requests Report</a></p>
+	</section>
 </div>

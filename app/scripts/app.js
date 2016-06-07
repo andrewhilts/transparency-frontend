@@ -101,6 +101,18 @@ var TransparencyApp = angular.module('TransparencyApp', [
           }]
         }
       })
+      .when('/reports/:report_id/retention-guide', {
+        templateUrl: 'views/retention-guide.html',
+        controller: 'RetentionGuideCtrl',
+        resolve: {
+          report: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/transparency-reports/" + $route.current.params.report_id);
+          }],
+          guide: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/transparency-reports/" + $route.current.params.report_id + "/retention_guide");
+          }]
+        }
+      })
       .when('/create-report', {
         templateUrl: 'views/report.html',
         controller: 'ReportCtrl',

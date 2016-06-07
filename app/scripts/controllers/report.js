@@ -7,24 +7,23 @@ function($scope, $location, report, $route, urls, dataProviderService){
 		report.report_period_start = moment(report.report_period_start).toDate();
 		report.report_period_end = moment(report.report_period_end).toDate();
 		report.publication_date = moment(report.publication_date).toDate();
+		report.guidePath = "#/reports/" + report.report_id + "/retention-guide";
 		$scope.report = report;
 		$scope.isCreating = false;
 	}
 
 	$scope.save = function(){
 		var reportJSON = getReportAsJSON();
+		var request;
 		if($scope.isCreating){
-			dataProviderService.putItem(urls.apiURL(), "/transparency-reports", {}, reportJSON)
-	 		.then(function(report){
-	 			$location.path('/reports/' + report.report_id);
-	 		});
+			request = dataProviderService.putItem(urls.apiURL(), "/transparency-reports", {}, reportJSON);
 		}
 		else{
-	 		dataProviderService.postItem(urls.apiURL(), "/transparency-reports/" + $scope.report.report_id, {}, reportJSON)
-	 		.then(function(report){
-	 			$route.reload();
-	 		});
- 		}
+	 		request = dataProviderService.postItem(urls.apiURL(), "/transparency-reports/" + $scope.report.report_id, {}, reportJSON);
+	 	}
+	 	request.then(function(report){
+ 			$location.path('/reports/');
+ 		});
 	}
 	var getReportAsJSON = function(){
 		var report = {};

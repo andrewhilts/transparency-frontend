@@ -1,0 +1,11 @@
+<div class="container center">
+<p><a href="#/reports/{{report.report_id}}">Back to report #{{report.report_id}} overview</a></p>
+	<form>
+	<h2 ng-if="isCreating">Create new Data Retention Guide for report #{{report.report_id}}</h2>
+	<h2 ng-if="!isCreating">Data Retention Guide for report #{{report.report_id}}</h2>
+	<label>Description of Data Retention Guide<br>
+	<textarea ng-model="guide.narrative"></textarea>
+	</label>
+	<p><button ng-click="save()">Save</button></p>
+	</form>
+</div>
