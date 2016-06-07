@@ -1,0 +1,7 @@
+.container {
+  max-width: 49.5em;
+}
+a, .link {
+	color: blue;
+	text-decoration: underline;
+}

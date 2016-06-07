@@ -1,0 +1,23 @@
+<div class="container center">
+<p><a href="#/reports">Back to reports overview</a></p>
+	<form>
+	<h2 ng-if="isCreating">Create new transparency report</h2>
+	<h2 ng-if="!isCreating">Report {{report.report_id}}</h2>
+
+	<p><label>Author Name: <input ng-model="report.author_name"/ required></label></p>
+
+	<h3>Reporting Period</h3>
+	<p><label>Start Date: <input type="date" ng-model="report.report_period_start" required/></label></p>
+	<p><label>End Date: <input type="date" ng-model="report.report_period_end" required/></label></p>
+
+	<h3>Publication</h3>
+	<p><label>Publication Date: <input type="date" ng-model="report.publication_date"/></label></p>
+
+	<h3>Components</h3>
+	<p>Clicking these will save your report, and move you to a new page.</p>
+	<p><a ng-click="">Data Retention Guide</a></p>
+	<p><a ng-click="">LEA Handbook</a></p>
+	<p><a ng-click="">Government Requests Report</a></p>
+	<p><button ng-click="save()">Save</button></p>
+	</form>
+</div>

@@ -1,0 +1,97 @@
+<html ng-app="TransparencyApp">
+<!--
+
+MOSQUITO wants its sweet, sweet data
+
+                //\
+               || |
+               || |
+               |  |
+          ______\/_  ,
+         '||||||'  (o)
+         `------'--  \
+                /|\   \
+                       \
+                       
+-->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title translate="pagetitle">DIY Transparency Report</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/tachyons.min.css"/>
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body class="backgroundcolor-white">
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="full-screen" id="loadingScreen"></div>
+    <div class="clearfix">
+        <header class="navbar">
+            <div class="container center textalign-center">
+                <a class="textdecoration-none black" href="#/">
+                    <h1 class="f-5 paddinghorizontal-small marginbottom-none" class="margintop-small">
+                    DIY Transparency Report
+                    </h1>
+                </a>
+            </div>
+        </header>
+    </div>
+
+    <!-- OTHER PAGES GET INSERTED HERE -->
+    <div ng-view=""></div>
+    
+    <footer class="backgroundcolor-black80 white margintop-xlarge paddinghorizontal-medium paddinghorizontal-none-ns paddingvertical-large clearfix">
+        <div class="container center">
+            <p class="xxxsmall white50 site-policy" translate="wrapper.privacy"></p>
+            <p class="xxxsmall white50 site-policy" translate="wrapper.disclaimer"></p>
+            <p class="xxxsmall white50 site-policy" translate="wrapper.license"></p>
+        </div>
+    </footer>
+<!-- <div class="feedback" ng-controller="FeedbackCtrl" ng-include="'views/feedback.html'"></div> -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/clipboard/dist/clipboard.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="bower_components/ngclipboard/dist/ngclipboard.js"></script>
+    <script src="bower_components/momentjs/moment.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- <script src="scripts/license.js"></script> -->
+    <!-- <script src="scripts/modules/svg-injector.js"></script> -->
+    <script src="scripts/modules/Enter/enter.js"></script>
+    <script src="scripts/modules/dataProviderService/dataproviderservice.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/report-list.js"></script>
+    <script src="scripts/controllers/report.js"></script>
+    <!-- endbuild -->
+</body>
+</html>
