@@ -1,0 +1,19 @@
+<div class="container center">
+<p><a href="#/categories">Back to categories overview</a></p>
+	<form>
+	<h2 ng-if="isCreating">Create new data category</h2>
+	<h2 ng-if="!isCreating">Category {{category.category_id}}</h2>
+
+	<p><label>Name: <input ng-model="category.name"/ required></label></p>
+	<p><label>Description: <textarea ng-model="category.description"/ required></textarea></label></p>
+
+	<p><button ng-click="save()">Save</button></p>
+	</form>
+	<section ng-if="!isCreating">
+		<h2>Data Items</h2>
+		<ul ng-if="category.items">
+			<li ng-repeat="item in category.items">{{item.name}}</li>
+		</ul>
+		<a href="{{category.itemPath}}">Add data item to category</a>
+	</section>
+</div>

@@ -120,6 +120,53 @@ var TransparencyApp = angular.module('TransparencyApp', [
           report: function(){return null}
         }
       })
+      .when('/categories', {
+        templateUrl: 'views/category-list.html',
+        controller: 'CategoryListCtrl',
+        resolve: {
+          categories: ["dataProviderService", "urls", "envOptions", function(dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/data-categories");
+          }]
+        }
+      })
+      .when('/categories/:category_id', {
+        templateUrl: 'views/category.html',
+        controller: 'CategoryCtrl',
+        resolve: {
+          category: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/data-categories/" + $route.current.params.category_id);
+          }]
+        }
+      })
+      .when('/create-category', {
+        templateUrl: 'views/category.html',
+        controller: 'CategoryCtrl',
+        resolve: {
+          category: function(){return null}
+        }
+      })
+      .when('/categories/:category_id/data-item/:item_id', {
+        templateUrl: 'views/item.html',
+        controller: 'ItemCtrl',
+        resolve: {
+          category: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/data-categories/" + $route.current.params.category_id);
+          }],
+          item: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/data-categories/" + $route.current.params.category_id + "/data-items/" + $route.current.params.item_id);
+          }]
+        }
+      })
+      .when('/categories/:category_id/create-data-item', {
+        templateUrl: 'views/item.html',
+        controller: 'ItemCtrl',
+        resolve: {
+          category: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/data-categories/" + $route.current.params.category_id);
+          }],
+          item: function(){return null}
+        }
+      })
       .when('/offline', {
         templateUrl: 'views/offline.html'
       })
