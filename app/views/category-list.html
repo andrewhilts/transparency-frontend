@@ -1,17 +1,8 @@
 <div class="container center">
 	<h2>Data Categories</h2>
 	<table class="width-100p">
-	<tr>
-		<th>Category ID</th>
-		<th>Name</th>
-		<th>Description</th>
-		<th colspan="2">Actions</th>
-	</tr>
 	<tr ng-repeat="category in categories">
-		<td>{{category.category_id}}</td>
-		<td>{{category.name}}</td>
-		<td>{{category.description}}</td>
-		<td><a ng-href="#/categories/{{category.category_id}}">View</a></td>
+		<td><a ng-href="#/categories/{{category.category_id}}">{{category.name}}</a></td>
 		<td><a class="link" ng-click="deleteCategory(category)">Delete</a></td>
 	</tr>
 	</table>

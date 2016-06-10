@@ -1,0 +1,27 @@
+<div class="container center">
+<p><a href="#/reports/{{report.report_id}}">Back to report #{{report.report_id}} overview</a></p>
+	<h2 ng-if="isCreating">Create new Law Enforcement Handbook for report #{{report.report_id}}</h2>
+	<h2 ng-if="!isCreating">Law Enforcement Handbook for report #{{report.report_id}}</h2>
+	<section ng-if="!isCreating">
+		<table class="width-100p dense">
+			<tr ng-repeat="category in handbook.categories">
+				<td><label><strong><input type="checkbox" ng-model="category.inclusion_status"> {{category.name}}</strong></label></td>
+				<td ng-repeat="action in category.actions">
+					<label ng-class="{'disabled': !category.inclusion_status}">
+					<input ng-disabled="!category.inclusion_status" type="checkbox" ng-model="action.inclusion_status" ng-if="(category.action_selection_type===2)"> 
+					<input ng-disabled="!category.inclusion_status" type="radio" ng-model="action.inclusion_status" name="category-{{category.handbook_category_id}}" ng-if="(category.action_selection_type===1)" ng-value="trueValue">
+					<input ng-disabled="!category.inclusion_status" type="checkbox" ng-model="action.inclusion_status" ng-if="(category.action_selection_type===3)" style="display:none"> 
+					<input ng-disabled="!category.inclusion_status" type="text" ng-model="action.narrative" ng-if="(category.action_selection_type===3)"> 
+					{{action.name}}</label>
+				</td>
+			</tr>
+			</table>
+	</section>
+	<hr/>
+	<form>
+	<label>Description of Law Enforcement Handbook<br>
+	<textarea ng-model="handbook.narrative" class="width-100p height-xxlarge"></textarea>
+	</label>
+	<p><button ng-click="save()">Save</button></p>
+	</form>
+</div>

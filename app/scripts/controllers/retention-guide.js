@@ -37,6 +37,8 @@ function($scope, $location, guide, report, $route, urls, dataProviderService){
 		guide.inclusion_status = $scope.guide.inclusion_status;
 		guide.complete_status = $scope.guide.complete_status;
 		guide.narrative = $scope.guide.narrative;
+		guide.data_categories = $scope.guide.data_categories;
+		console.log(guide);
 		return angular.toJson(guide)
 	}
 }

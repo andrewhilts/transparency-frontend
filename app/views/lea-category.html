@@ -1,0 +1,23 @@
+<div class="container center">
+<p><a href="#/lea-categories">Back to Law Enforcement Action Categories overview</a></p>
+	<form>
+	<h2 ng-if="isCreating">Create new Law Enforcement Action Category</h2>
+	<h2 ng-if="!isCreating">Category {{lea_category.category_id}}</h2>
+
+	<p><label>Name: <input ng-model="lea_category.name"/ required></label></p>
+	<p><label>Action selection type: <select ng-model="selected_action_selection_type" ng-options="type.name for type in action_selection_types" required>
+	</select></label></p>
+
+	<p><button ng-click="save()">Save</button></p>
+	</form>
+	<section ng-if="!isCreating">
+		<h2>Law Enforcement Actions</h2>
+		<table class="width-100p">
+			<tr ng-repeat="lea_action in lea_actions">
+				<td><a ng-href="#/lea-categories/{{lea_category.category_id}}/lea-actions/{{lea_action.action_id}}">{{lea_action.name}}</a></td>
+				<td><a class="link" ng-click="deleteAction(lea_action)">Delete</a></td>
+			</tr>
+		</table>
+		<a ng-href="{{lea_category.actionPath}}">Add law enforcement action to category</a>
+	</section>
+</div>

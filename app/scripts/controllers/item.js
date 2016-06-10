@@ -21,7 +21,7 @@ function($scope, $location, category, item, $route, urls, dataProviderService){
 	 		request = dataProviderService.postItem(urls.apiURL(), "/data-categories/" + category.category_id + "/data-items/" + $scope.item.item_id, {}, itemJSON);
 	 	}
 	 	request.then(function(item){
- 			$location.path('/items/');
+ 			$location.path('/categories/' + category.category_id);
  		});
 	}
 	var getItemAsJSON = function(){
@@ -30,5 +30,6 @@ function($scope, $location, category, item, $route, urls, dataProviderService){
 		item.description = $scope.item.description;
 		return angular.toJson(item)
 	}
+
 }
 ]);

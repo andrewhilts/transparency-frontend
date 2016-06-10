@@ -1,0 +1,10 @@
+<div class="container center">
+	<h2>Law Enforcement Action Categories</h2>
+	<table class="width-100p">
+	<tr ng-repeat="lea_category in lea_categories">
+		<td><a ng-href="#/lea-categories/{{lea_category.category_id}}">{{lea_category.name}}</a></td>
+		<td><a class="link" ng-click="deleteCategory(lea_category)">Delete</a></td>
+	</tr>
+	</table>
+	<p><a href="#/create-lea-category">Create a new Law Enforcement Action Category</a></p>
+</div>

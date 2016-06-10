@@ -79,9 +79,18 @@ var TransparencyApp = angular.module('TransparencyApp', [
   }])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+      .when('/', { 
+        templateUrl: 'views/report-list.html',
+        controller: 'ReportListCtrl',
+        resolve: {
+          reports: ["dataProviderService", "urls", "envOptions", function(dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/transparency-reports");
+          }]
+        }
+      })
+      .when('/admin', {
+        templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl'
       })
       .when('/reports', {
         templateUrl: 'views/report-list.html',
@@ -101,6 +110,13 @@ var TransparencyApp = angular.module('TransparencyApp', [
           }]
         }
       })
+      .when('/create-report', {
+        templateUrl: 'views/report.html',
+        controller: 'ReportCtrl',
+        resolve: {
+          report: function(){return null}
+        }
+      })
       .when('/reports/:report_id/retention-guide', {
         templateUrl: 'views/retention-guide.html',
         controller: 'RetentionGuideCtrl',
@@ -108,16 +124,29 @@ var TransparencyApp = angular.module('TransparencyApp', [
           report: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
             return dataProviderService.getItem(urls.apiURL(), "/transparency-reports/" + $route.current.params.report_id);
           }],
-          guide: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
-            return dataProviderService.getItem(urls.apiURL(), "/transparency-reports/" + $route.current.params.report_id + "/retention_guide");
+          guide: ["$route", "dataProviderService", "urls", "envOptions", "$q", function($route, dataProviderService, urls, envOptions, $q) {
+            // Get guide for report and create if not existing
+            return $q(function(resolve, reject){
+              dataProviderService.getItem(urls.apiURL(), "/transparency-reports/" + $route.current.params.report_id + "/retention_guide")
+              .then(function(guide){
+                if(!guide){
+                  dataProviderService.putItem(urls.apiURL(), "/transparency-reports/" + $route.current.params.report_id + "/retention_guide", {}, {})
+                  .then(function(guide){
+                    resolve(guide);
+                  })
+                  .catch(function(err){
+                    reject(err);
+                  })
+                }
+                else{
+                  resolve(guide);
+                }
+              })
+              .catch(function(err){
+                reject(err);
+              })
+            })
           }]
-        }
-      })
-      .when('/create-report', {
-        templateUrl: 'views/report.html',
-        controller: 'ReportCtrl',
-        resolve: {
-          report: function(){return null}
         }
       })
       .when('/categories', {
@@ -135,6 +164,9 @@ var TransparencyApp = angular.module('TransparencyApp', [
         resolve: {
           category: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
             return dataProviderService.getItem(urls.apiURL(), "/data-categories/" + $route.current.params.category_id);
+          }],
+          items: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/data-categories/" + $route.current.params.category_id + "/data-items");
           }]
         }
       })
@@ -142,10 +174,11 @@ var TransparencyApp = angular.module('TransparencyApp', [
         templateUrl: 'views/category.html',
         controller: 'CategoryCtrl',
         resolve: {
-          category: function(){return null}
+          category: function(){return null},
+          items: function(){return null}
         }
       })
-      .when('/categories/:category_id/data-item/:item_id', {
+      .when('/categories/:category_id/items/:item_id', {
         templateUrl: 'views/item.html',
         controller: 'ItemCtrl',
         resolve: {
@@ -165,6 +198,197 @@ var TransparencyApp = angular.module('TransparencyApp', [
             return dataProviderService.getItem(urls.apiURL(), "/data-categories/" + $route.current.params.category_id);
           }],
           item: function(){return null}
+        }
+      })
+      .when('/lea-categories', {
+        templateUrl: 'views/lea-category-list.html',
+        controller: 'LEACategoryListCtrl',
+        resolve: {
+          lea_categories: ["dataProviderService", "urls", "envOptions", function(dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/lea-categories");
+          }]
+        }
+      })
+      .when('/lea-categories/:category_id', {
+        templateUrl: 'views/lea-category.html',
+        controller: 'LEACategoryCtrl',
+        resolve: {
+          lea_category: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/lea-categories/" + $route.current.params.category_id);
+          }],
+          lea_actions: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/lea-categories/" + $route.current.params.category_id + "/lea-actions");
+          }]
+        }
+      })
+      .when('/create-lea-category', {
+        templateUrl: 'views/lea-category.html',
+        controller: 'LEACategoryCtrl',
+        resolve: {
+          lea_category: function(){return null},
+          lea_actions: function(){return null}
+        }
+      })
+      .when('/lea-categories/:category_id/lea-actions/:action_id', {
+        templateUrl: 'views/lea-action.html',
+        controller: 'LEAActionCtrl',
+        resolve: {
+          lea_category: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/lea-categories/" + $route.current.params.category_id);
+          }],
+          lea_action: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/lea-categories/" + $route.current.params.category_id + "/lea-actions/" + $route.current.params.action_id);
+          }]
+        }
+      })
+      .when('/lea-categories/:category_id/create-lea-action', {
+        templateUrl: 'views/lea-action.html',
+        controller: 'LEAActionCtrl',
+        resolve: {
+          lea_category: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/lea-categories/" + $route.current.params.category_id);
+          }],
+          lea_action: function(){return null}
+        }
+      })
+      .when('/reports/:report_id/lea-handbook', {
+        templateUrl: 'views/lea-handbook.html',
+        controller: 'LEAHandbookCtrl',
+        resolve: {
+          report: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/transparency-reports/" + $route.current.params.report_id);
+          }],
+          handbook: ["$route", "dataProviderService", "urls", "envOptions", "$q", function($route, dataProviderService, urls, envOptions, $q) {
+            // Get handbook for report and create if not existing
+            return $q(function(resolve, reject){
+              dataProviderService.getItem(urls.apiURL(), "/transparency-reports/" + $route.current.params.report_id + "/law-enforcement-handbook")
+              .then(function(handbook){
+                if(!handbook){
+                  dataProviderService.putItem(urls.apiURL(), "/transparency-reports/" + $route.current.params.report_id + "/law-enforcement-handbook", {}, {})
+                  .then(function(handbook){
+                    resolve(handbook);
+                  })
+                  .catch(function(err){
+                    reject(err);
+                  })
+                }
+                else{
+                  resolve(handbook);
+                }
+              })
+              .catch(function(err){
+                reject(err);
+              })
+            })
+          }]
+        }
+      })
+      .when('/gov-request-categories', {
+        templateUrl: 'views/gov-request-category-list.html',
+        controller: 'GovRequestCategoryListCtrl',
+        resolve: {
+          gov_request_categories: ["dataProviderService", "urls", "envOptions", function(dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/gov-request-categories");
+          }]
+        }
+      })
+      .when('/gov-request-categories/:category_id', {
+        templateUrl: 'views/gov-request-category.html',
+        controller: 'GovRequestCategoryCtrl',
+        resolve: {
+          gov_request_category: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/gov-request-categories/" + $route.current.params.category_id);
+          }],
+          gov_request_types: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/gov-request-categories/" + $route.current.params.category_id + "/gov-request-types");
+          }]
+        }
+      })
+      .when('/create-gov-request-category', {
+        templateUrl: 'views/gov-request-category.html',
+        controller: 'GovRequestCategoryCtrl',
+        resolve: {
+          gov_request_category: function(){return null},
+          gov_request_types: function(){return null}
+        }
+      })
+      .when('/gov-request-categories/:category_id/gov-request-types/:type_id', {
+        templateUrl: 'views/gov-request-type.html',
+        controller: 'GovRequestTypeCtrl',
+        resolve: {
+          gov_request_category: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/gov-request-categories/" + $route.current.params.category_id);
+          }],
+          gov_request_type: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/gov-request-categories/" + $route.current.params.category_id + "/gov-request-types/" + $route.current.params.type_id);
+          }]
+        }
+      })
+      .when('/gov-request-categories/:category_id/create-gov-request-type', {
+        templateUrl: 'views/gov-request-type.html',
+        controller: 'GovRequestTypeCtrl',
+        resolve: {
+          gov_request_category: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/gov-request-categories/" + $route.current.params.category_id);
+          }],
+          gov_request_type: function(){return null}
+        }
+      })
+      .when('/gov-request-responses', {
+        templateUrl: 'views/gov-request-response-list.html',
+        controller: 'GovRequestResponseListCtrl',
+        resolve: {
+          gov_request_responses: ["dataProviderService", "urls", "envOptions", function(dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/gov-request-responses");
+          }]
+        }
+      })
+      .when('/gov-request-responses/:response_id', {
+        templateUrl: 'views/gov-request-response.html',
+        controller: 'GovRequestResponseCtrl',
+        resolve: {
+          gov_request_response: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/gov-request-responses/" + $route.current.params.response_id);
+          }]
+        }
+      })
+      .when('/create-gov-request-response', {
+        templateUrl: 'views/gov-request-response.html',
+        controller: 'GovRequestResponseCtrl',
+        resolve: {
+          gov_request_response: function(){return null}
+        }
+      })
+      .when('/reports/:report_id/gov-request-report', {
+        templateUrl: 'views/gov-request-report.html',
+        controller: 'GovRequestReportCtrl',
+        resolve: {
+          report: ["$route", "dataProviderService", "urls", "envOptions", function($route, dataProviderService, urls, envOptions) {
+            return dataProviderService.getItem(urls.apiURL(), "/transparency-reports/" + $route.current.params.report_id);
+          }],
+          request_report: ["$route", "dataProviderService", "urls", "envOptions", "$q", function($route, dataProviderService, urls, envOptions, $q) {
+            // Get handbook for report and create if not existing
+            return $q(function(resolve, reject){
+              dataProviderService.getItem(urls.apiURL(), "/transparency-reports/" + $route.current.params.report_id + "/gov-request-report")
+              .then(function(handbook){
+                if(!handbook){
+                  dataProviderService.putItem(urls.apiURL(), "/transparency-reports/" + $route.current.params.report_id + "/gov-request-report", {}, {})
+                  .then(function(handbook){
+                    resolve(handbook);
+                  })
+                  .catch(function(err){
+                    reject(err);
+                  })
+                }
+                else{
+                  resolve(handbook);
+                }
+              })
+              .catch(function(err){
+                reject(err);
+              })
+            })
+          }]
         }
       })
       .when('/offline', {

@@ -1,0 +1,31 @@
+<div class="container center">
+<p><a href="#/reports/{{report.report_id}}">Back to report #{{report.report_id}} overview</a></p>
+	<h2 ng-if="isCreating">Create new Government Requests Report for report #{{report.report_id}}</h2>
+	<h2 ng-if="!isCreating">Government Requests Report for report #{{report.report_id}}</h2>
+	<section ng-if="!isCreating">
+		<table class="width-100p dense">
+			<tr>
+				<th colspan="2">Category</th>
+				<th ng-repeat="headerItem in header">
+					{{headerItem.name}}
+				</th>
+			</tr>
+			<tbody ng-repeat="disclosure_category in request_report.categorized_disclosures" style="border-top:1px solid black">
+				<tr ng-repeat="disclosure in disclosure_category.disclosures">
+				<td ng-if="$first" rowspan="{{disclosure_category.disclosures.length}}">{{disclosure_category.name}}</td>
+				<td><strong>{{disclosure.name}}</strong></td>
+				<td ng-repeat="response in disclosure.disclosure_responses">
+					<input ng-model="response.count" size=7 pattern="\d+"/>
+				</td>
+				</tr>
+			</tbody>
+			</table>
+	</section>
+	<hr/>
+	<form>
+	<label>Description of Government Requests Report<br>
+	<textarea ng-model="request_report.narrative" class="width-100p height-xxlarge"></textarea>
+	</label>
+	<p><button ng-click="save()">Save</button></p>
+	</form>
+</div>

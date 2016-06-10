@@ -5,15 +5,18 @@
 	<h2 ng-if="!isCreating">Category {{category.category_id}}</h2>
 
 	<p><label>Name: <input ng-model="category.name"/ required></label></p>
-	<p><label>Description: <textarea ng-model="category.description"/ required></textarea></label></p>
+	<p><label>Description: <textarea ng-model="category.description"/ required class="width-100p height-xxlarge"></textarea></label></p>
 
 	<p><button ng-click="save()">Save</button></p>
 	</form>
 	<section ng-if="!isCreating">
 		<h2>Data Items</h2>
-		<ul ng-if="category.items">
-			<li ng-repeat="item in category.items">{{item.name}}</li>
-		</ul>
-		<a href="{{category.itemPath}}">Add data item to category</a>
+		<table class="width-100p">
+			<tr ng-repeat="item in items">
+				<td><a ng-href="#/categories/{{category.category_id}}/items/{{item.item_id}}">{{item.name}}</a></td>
+				<td><a class="link" ng-click="deleteItem(item)">Delete</a></td>
+			</tr>
+		</table>
+		<a ng-href="{{category.itemPath}}">Add data item to category</a>
 	</section>
 </div>

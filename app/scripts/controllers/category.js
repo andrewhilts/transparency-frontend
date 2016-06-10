@@ -1,11 +1,12 @@
 'use strict';
-TransparencyApp.controller('CategoryCtrl', ['$scope', '$location', 'category', '$route', 'urls', 'dataProviderService',
-function($scope, $location, category, $route, urls, dataProviderService){
+TransparencyApp.controller('CategoryCtrl', ['$scope', '$location', 'category', 'items', '$route', 'urls', 'dataProviderService',
+function($scope, $location, category, items, $route, urls, dataProviderService){
 	$scope.isCreating = true;
 
 	if(category !== null){
 		category.itemPath = "#/categories/" + category.category_id + "/create-data-item";
 		$scope.category = category;
+		$scope.items = items;
 		$scope.isCreating = false;
 	}
 
@@ -27,6 +28,12 @@ function($scope, $location, category, $route, urls, dataProviderService){
 		category.name = $scope.category.name;
 		category.description = $scope.category.description;
 		return angular.toJson(category)
+	}
+	$scope.deleteItem = function(item){
+		dataProviderService.deleteItem(urls.apiURL(), "/data-categories/" + category.category_id + "/data-items/" + item.item_id)
+ 		.then(function(){
+ 			$route.reload()
+ 		})
 	}
 }
 ]);

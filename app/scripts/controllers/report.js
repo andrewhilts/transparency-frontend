@@ -8,6 +8,8 @@ function($scope, $location, report, $route, urls, dataProviderService){
 		report.report_period_end = moment(report.report_period_end).toDate();
 		report.publication_date = moment(report.publication_date).toDate();
 		report.guidePath = "#/reports/" + report.report_id + "/retention-guide";
+		report.handbookPath = "#/reports/" + report.report_id + "/lea-handbook";
+		report.govRequestsReportPath = "#/reports/" + report.report_id + "/gov-request-report";
 		$scope.report = report;
 		$scope.isCreating = false;
 	}

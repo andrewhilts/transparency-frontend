@@ -5,3 +5,13 @@ a, .link {
 	color: blue;
 	text-decoration: underline;
 }
+.disabled {
+	color: #999;
+}
+td {
+	padding: 0.5rem 0.25rem;
+}
+table.dense td,
+table.dense th {
+	font-size:0.8rem;
+}
