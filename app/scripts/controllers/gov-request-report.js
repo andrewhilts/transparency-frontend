@@ -8,19 +8,39 @@ function($scope, $location, request_report, report, $route, urls, dataProviderSe
 		report.publication_date = moment(report.publication_date).toDate();
 		$scope.report = report;
 	}
-	console.log(request_report);
 	if(request_report !== null){
 		$scope.request_report = request_report;
-		console.log(request_report);
 		$scope.isCreating = false;
 		// for(i in request_report.categories[Object.keys(request_report.categories)][0])
 		$scope.header = request_report.categorized_disclosures[Object.keys(request_report.categorized_disclosures)[0]].disclosures[0].disclosure_responses;
+		$scope.totals = [];
 	}else{
 		$scope.request_report = {
 			inclusion_status: true,
 			complete_status: false	
 		}
 	}
+
+	var numberWithCommas=function(x) {
+    	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
+	$scope.compileTotals = function(){
+		$scope.totals = [];
+		for(var i=0; i<$scope.header.length; i++){
+			var colTotal=0;
+			for(var category_id in $scope.request_report.categorized_disclosures){
+				for(var k=0; k<$scope.request_report.categorized_disclosures[category_id].disclosures.length; k++){
+					var cellValue = $scope.request_report.categorized_disclosures[category_id].disclosures[k].disclosure_responses[i].count
+					if(parseInt(cellValue)){
+						colTotal+=parseInt(cellValue);
+					}
+				}
+			}
+			$scope.totals.push(numberWithCommas(colTotal));
+		}
+	};
+	$scope.compileTotals();
 
 	$scope.save = function(){
 		var requestReportJSON = getRequestReportAsJSON();
@@ -44,5 +64,6 @@ function($scope, $location, request_report, report, $route, urls, dataProviderSe
 		console.log(request_report);
 		return angular.toJson(request_report)
 	}
+
 }
 ]);

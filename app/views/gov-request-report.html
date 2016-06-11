@@ -15,8 +15,14 @@
 				<td ng-if="$first" rowspan="{{disclosure_category.disclosures.length}}">{{disclosure_category.name}}</td>
 				<td><strong>{{disclosure.name}}</strong></td>
 				<td ng-repeat="response in disclosure.disclosure_responses">
-					<input ng-model="response.count" size=7 pattern="\d+"/>
+					<input ng-model="response.count" size=7 pattern="\d+" ng-change="compileTotals()"/>
 				</td>
+				</tr>
+			</tbody>
+			<tbody>
+				<tr style="border-top:1px solid black">
+					<td colspan="2">Totals</td>
+					<td ng-repeat="total in totals track by $index"><strong>{{total}}</strong></td>
 				</tr>
 			</tbody>
 			</table>
