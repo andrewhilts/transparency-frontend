@@ -15,3 +15,14 @@ table.dense td,
 table.dense th {
 	font-size:0.8rem;
 }
+.dropdown {
+	position:absolute;
+	background:white;
+	padding:1rem;
+	border:1px solid #ccc;
+	width:45%;
+	font-size:0.85rem;
+	line-height: 1.2;
+	text-align: left;
+	font-weight: normal
+}

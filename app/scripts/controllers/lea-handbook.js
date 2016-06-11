@@ -20,6 +20,22 @@ function($scope, $location, handbook, report, $route, urls, dataProviderService)
 		}
 	}
 
+	var oldNarrative;
+
+	$scope.showNarrative = function(narrative){
+		console.log(narrative)
+		if(oldNarrative == narrative && oldNarrative.showNarrative === true){
+			oldNarrative.showNarrative = false;
+		}
+		else{
+			if(oldNarrative && oldNarrative !== narrative){
+				oldNarrative.showNarrative = false;
+			}
+			narrative.showNarrative = true;
+			oldNarrative = narrative;
+		}
+	}
+
 	$scope.save = function(){
 		var handbookJSON = getHandbookAsJSON();
 		var request;

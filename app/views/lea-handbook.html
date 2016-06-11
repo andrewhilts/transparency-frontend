@@ -7,12 +7,14 @@
 			<tr ng-repeat="category in handbook.categories">
 				<td><label><strong><input type="checkbox" ng-model="category.inclusion_status"> {{category.name}}</strong></label></td>
 				<td ng-repeat="action in category.actions">
+					<button ng-click="showNarrative(action)">(i)</button>
 					<label ng-class="{'disabled': !category.inclusion_status}">
 					<input ng-disabled="!category.inclusion_status" type="checkbox" ng-model="action.inclusion_status" ng-if="(category.action_selection_type===2)"> 
 					<input ng-disabled="!category.inclusion_status" type="radio" ng-model="action.inclusion_status" name="category-{{category.handbook_category_id}}" ng-if="(category.action_selection_type===1)" ng-value="trueValue">
 					<input ng-disabled="!category.inclusion_status" type="checkbox" ng-model="action.inclusion_status" ng-if="(category.action_selection_type===3)" style="display:none"> 
 					<input ng-disabled="!category.inclusion_status" type="text" ng-model="action.narrative" ng-if="(category.action_selection_type===3)"> 
 					{{action.name}}</label>
+					<input ng-disabled="!category.inclusion_status" type="text" ng-model="action.narrative" ng-if="action.showNarrative"> 
 				</td>
 			</tr>
 			</table>

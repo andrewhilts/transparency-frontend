@@ -8,6 +8,7 @@ function($scope, $location, request_report, report, $route, urls, dataProviderSe
 		report.publication_date = moment(report.publication_date).toDate();
 		$scope.report = report;
 	}
+	console.log(request_report)
 	if(request_report !== null){
 		$scope.request_report = request_report;
 		$scope.isCreating = false;
@@ -18,6 +19,41 @@ function($scope, $location, request_report, report, $route, urls, dataProviderSe
 		$scope.request_report = {
 			inclusion_status: true,
 			complete_status: false	
+		}
+	}
+	var oldDescription;
+	var oldHeaderDescription;
+
+	$scope.showDescription = function(description){
+		if(oldDescription == description && oldDescription.showDescription === true){
+			oldDescription.showDescription = false;
+		}
+		else{
+			if(oldDescription && oldDescription !== description){
+				oldDescription.showDescription = false;
+			}
+			description.showDescription = true;
+			oldDescription = description;
+		}
+		if(oldHeaderDescription){
+			oldHeaderDescription.showDescription = false;
+		}
+	}
+	$scope.showHeaderDescription = function(description){
+		if(oldHeaderDescription == description && oldHeaderDescription.showDescription === true){
+			oldHeaderDescription.showDescription = false;
+			console.log(1)
+		}
+		else{
+			if(oldHeaderDescription && oldHeaderDescription !== description){
+				oldHeaderDescription.showDescription = false;
+			}
+			description.showDescription = true;
+			oldHeaderDescription = description;
+			console.log(2)
+		}
+		if(oldDescription){
+			oldDescription.showDescription = false;
 		}
 	}
 
