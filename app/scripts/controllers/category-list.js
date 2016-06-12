@@ -5,10 +5,13 @@ function($scope, $location, categories, urls, dataProviderService, $route){
 	$scope.categories = categories;
 
 	$scope.deleteCategory = function(category){
-		dataProviderService.deleteItem(urls.apiURL(), "/data-categories/" + category.category_id)
- 		.then(function(categories){
- 			$route.reload()
- 		})
+		var areYouSure = window.confirm("Are you sure you want to delete this category?");
+		if(areYouSure){
+			dataProviderService.deleteItem(urls.apiURL(), "/data-categories/" + category.category_id)
+	 		.then(function(categories){
+	 			$route.reload()
+	 		});
+	 	}
 	}
 }
 ]);

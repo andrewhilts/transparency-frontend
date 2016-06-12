@@ -30,10 +30,13 @@ function($scope, $location, category, items, $route, urls, dataProviderService){
 		return angular.toJson(category)
 	}
 	$scope.deleteItem = function(item){
-		dataProviderService.deleteItem(urls.apiURL(), "/data-categories/" + category.category_id + "/data-items/" + item.item_id)
- 		.then(function(){
- 			$route.reload()
- 		})
+		var areYouSure = window.confirm("Are you sure you want to delete this item?");
+		if(areYouSure){
+			dataProviderService.deleteItem(urls.apiURL(), "/data-categories/" + category.category_id + "/data-items/" + item.item_id)
+	 		.then(function(){
+	 			$route.reload()
+	 		});
+ 		}
 	}
 }
 ]);

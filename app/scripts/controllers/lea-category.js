@@ -37,10 +37,13 @@ function($scope, $location, lea_category, lea_actions, $route, urls, dataProvide
 		return angular.toJson(lea_category)
 	}
 	$scope.deleteAction = function(lea_action){
-		dataProviderService.deleteAction(urls.apiURL(), "/lea-categories/" + lea_category.category_id + "/lea-actions/" + lea_action.action_id)
- 		.then(function(){
- 			$route.reload()
- 		})
+		var areYouSure = window.confirm("Are you sure you want to delete this?");
+		if(areYouSure){
+			dataProviderService.deleteAction(urls.apiURL(), "/lea-categories/" + lea_category.category_id + "/lea-actions/" + lea_action.action_id)
+	 		.then(function(){
+	 			$route.reload()
+	 		});
+ 		}
 	}
 }
 ]);

@@ -30,10 +30,13 @@ function($scope, $location, gov_request_category, gov_request_types, $route, url
 		return angular.toJson(gov_request_category)
 	}
 	$scope.deleteType = function(type){
-		dataProviderService.deleteItem(urls.apiURL(), "/gov-request-categories/" + gov_request_category.category_id + "/gov-request-types/" + type.type_id)
- 		.then(function(){
- 			$route.reload()
- 		})
+		var areYouSure = window.confirm("Are you sure you want to delete this?");
+		if(areYouSure){
+			dataProviderService.deleteItem(urls.apiURL(), "/gov-request-categories/" + gov_request_category.category_id + "/gov-request-types/" + type.type_id)
+	 		.then(function(){
+	 			$route.reload()
+	 		});
+	 	}
 	}
 }
 ]);
