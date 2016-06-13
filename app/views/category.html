@@ -7,7 +7,7 @@
 	<p><label>Name: <input ng-model="category.name"/ required></label></p>
 	<p><label>Description: <textarea ng-model="category.description"/ required class="width-100p height-xxlarge"></textarea></label></p>
 
-	<p><button ng-click="save()">Save</button></p>
+	<p><button ng-click="save()" class="button button-default">Save</button></p>
 	</form>
 	<section ng-if="!isCreating">
 		<h2>Data Items</h2>
@@ -17,6 +17,6 @@
 				<td><a class="link" ng-click="deleteItem(item)">Delete</a></td>
 			</tr>
 		</table>
-		<a ng-href="{{category.itemPath}}">Add data item to category</a>
+		<a ng-href="{{category.itemPath}}" class="button button-default">Add data item to category</a>
 	</section>
 </div>

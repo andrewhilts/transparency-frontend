@@ -8,7 +8,7 @@
 	<p><label>Action selection type: <select ng-model="selected_action_selection_type" ng-options="type.name for type in action_selection_types" required>
 	</select></label></p>
 
-	<p><button ng-click="save()">Save</button></p>
+	<p><button ng-click="save()" class="button button-default">Save</button></p>
 	</form>
 	<section ng-if="!isCreating">
 		<h2>Law Enforcement Actions</h2>
@@ -18,6 +18,6 @@
 				<td><a class="link" ng-click="deleteAction(lea_action)">Delete</a></td>
 			</tr>
 		</table>
-		<a ng-href="{{lea_category.actionPath}}">Add law enforcement action to category</a>
+		<a ng-href="{{lea_category.actionPath}}" class="button button-default">Add law enforcement action to category</a>
 	</section>
 </div>

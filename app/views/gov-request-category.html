@@ -8,7 +8,7 @@
 	<p><label>Description: <textarea ng-model="gov_request_category.description" required class="width-100p height-xxlarge"></textarea></label></p>
 	</select></label></p>
 
-	<p><button ng-click="save()">Save</button></p>
+	<p><button ng-click="save()" class="button button-default">Save</button></p>
 	</form>
 	<section ng-if="!isCreating">
 		<h2>Government Request Types</h2>
@@ -18,6 +18,6 @@
 				<td><a class="link" ng-click="deleteType(gov_request_type)">Delete</a></td>
 			</tr>
 		</table>
-		<a ng-href="{{gov_request_category.typePath}}">Add government request type to category</a>
+		<a ng-href="{{gov_request_category.typePath}}" class="button button-default">Add government request type to category</a>
 	</section>
 </div>
