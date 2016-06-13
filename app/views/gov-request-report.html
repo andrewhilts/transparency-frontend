@@ -1,40 +1,49 @@
-<div class="container center">
-<p><a href="#/reports/{{report.report_id}}">Back to report #{{report.report_id}} overview</a></p>
-	<h2 ng-if="isCreating">Create new Government Requests Report for report #{{report.report_id}}</h2>
-	<h2 ng-if="!isCreating">Government Requests Report for report #{{report.report_id}}</h2>
-	<section ng-if="!isCreating">
-		<table class="width-100p dense">
-			<tr>
-				<th colspan="2">Category</th>
-				<th ng-repeat="headerItem in header">
-					{{headerItem.name}}
-					<br><button ng-click="showHeaderDescription(headerItem)"><span ng-if="!headerItem.showDescription">(i)</span><span ng-if="headerItem.showDescription">(x)</span></button><div ng-if="headerItem.showDescription" class="dropdown">{{headerItem.description}}</div>
-				</th>
-			</tr>
-			<tbody ng-repeat="disclosure_category in request_report.categorized_disclosures" style="border-top:1px solid black">
-				<tr ng-repeat="disclosure in disclosure_category.disclosures">
-				<td ng-if="$first" rowspan="{{disclosure_category.disclosures.length}}">{{disclosure_category.name}}</td>
-				<td>
-					<strong>{{disclosure.name}}</strong>
-					<br><button ng-click="showDescription(disclosure)"><span ng-if="!disclosure.showDescription">(i)</span><span ng-if="disclosure.showDescription">(x)</span></button><div ng-if="disclosure.showDescription" class="dropdown">{{disclosure.description}}</div></td>
-				<td ng-repeat="response in disclosure.disclosure_responses">
-					<input ng-model="response.count" size=7 pattern="\d+" ng-change="compileTotals()"/>
-				</td>
+<div class="paddinghorizontal-medium">
+
+	<h2 class="textalign-center" ng-if="isCreating">Create new Government Requests Report for report #{{report.report_id}}</h2>
+	<h2 class="textalign-center" ng-if="!isCreating">Government Requests Report for report #{{report.report_id}}</h2>
+
+	<div class="backgroundcolor-white paddinghorizontal-large paddingtop-medium paddingbottom-small">
+
+		<section ng-if="!isCreating">
+
+			<table class="width-100p dense">
+				<tr>
+					<th colspan="2">Category</th>
+					<th ng-repeat="headerItem in header">
+						{{headerItem.name}}
+						<br><button ng-click="showHeaderDescription(headerItem)"><span ng-if="!headerItem.showDescription">(i)</span><span ng-if="headerItem.showDescription">(x)</span></button><div ng-if="headerItem.showDescription" class="dropdown">{{headerItem.description}}</div>
+					</th>
 				</tr>
-			</tbody>
-			<tbody>
-				<tr style="border-top:1px solid black">
-					<td colspan="2">Totals</td>
-					<td ng-repeat="total in totals track by $index"><strong>{{total}}</strong></td>
-				</tr>
-			</tbody>
-			</table>
-	</section>
-	<hr/>
-	<form>
-	<label>Description of Government Requests Report<br>
-	<textarea ng-model="request_report.narrative" class="width-100p height-xxlarge"></textarea>
-	</label>
-	<p><button ng-click="save()">Save</button></p>
-	</form>
+				<tbody ng-repeat="disclosure_category in request_report.categorized_disclosures" style="border-top:1px solid black">
+					<tr ng-repeat="disclosure in disclosure_category.disclosures">
+					<td ng-if="$first" rowspan="{{disclosure_category.disclosures.length}}">{{disclosure_category.name}}</td>
+					<td>
+						<strong>{{disclosure.name}}</strong>
+						<br><button ng-click="showDescription(disclosure)"><span ng-if="!disclosure.showDescription">(i)</span><span ng-if="disclosure.showDescription">(x)</span></button><div ng-if="disclosure.showDescription" class="dropdown">{{disclosure.description}}</div></td>
+					<td ng-repeat="response in disclosure.disclosure_responses">
+						<input ng-model="response.count" size=7 pattern="\d+" ng-change="compileTotals()"/>
+					</td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr style="border-top:1px solid black">
+						<td colspan="2">Totals</td>
+						<td ng-repeat="total in totals track by $index"><strong>{{total}}</strong></td>
+					</tr>
+				</tbody>
+				</table>
+		</section>
+		
+		<hr />
+
+		<form>
+			<label>Description of Government Requests Report<br>
+			<textarea ng-model="request_report.narrative" class="width-100p height-xxlarge"></textarea>
+			</label>
+			<p><button class="button button-default" ng-click="save()">Save changes</button></p>
+		</form>
+	</div>
+
+	<p><a class="button button-default" href="#/reports/{{report.report_id}}">Back to report #{{report.report_id}} overview</a></p>
 </div>

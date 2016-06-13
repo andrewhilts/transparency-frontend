@@ -1,23 +1,40 @@
-<div class="container center">
-<p><a href="#/reports">Back to reports overview</a></p>
-	<form>
-	<h2 ng-if="isCreating">Create new transparency report</h2>
-	<h2 ng-if="!isCreating">Report {{report.report_id}}</h2>
+<div class="container paddinghorizontal-medium center">
+	<div class="paddingvertical-medium paddinghorizontal-large backgroundcolor-white clear-both clearfix">
+		
+		<h2 class="margintop-small textalign-center f1" ng-if="isCreating">Create new transparency report</h2>
+		<h2 class="margintop-small textalign-center f1" ng-if="!isCreating">Report {{report.report_id}}</h2>
 
-	<p><label>Author Name: <input ng-model="report.author_name"/ required></label></p>
+		<div class="width-60p float-left">
+			<form>
 
-	<h3>Reporting Period</h3>
-	<p><label>Start Date: <input type="date" ng-model="report.report_period_start" required/></label></p>
-	<p><label>End Date: <input type="date" ng-model="report.report_period_end" required/></label></p>
+			<p><label>Author Name: <input ng-model="report.author_name"/ required></label></p>
 
-	<h3>Publication</h3>
-	<p><label>Publication Date: <input type="date" ng-model="report.publication_date"/></label></p>
-	<p><button ng-click="save()">Save</button></p>
-	</form>
-	<section ng-if="!isCreating">
-	<h3>Components</h3>
-	<p><a ng-href="{{report.guidePath}}">Data Retention Guide</a></p>
-	<p><a ng-href="{{report.handbookPath}}">LEA Handbook</a></p>
-	<p><a ng-href="{{report.govRequestsReportPath}}">Government Requests Report</a></p>
-	</section>
+			<!-- <h3>Reporting Period</h3> -->
+			<p><label>Start Date: <input type="date" ng-model="report.report_period_start" required/></label></p>
+			<p><label>End Date: <input type="date" ng-model="report.report_period_end" required/></label></p>
+
+			<!-- <h3>Publication</h3> -->
+			<p><label>Publication Date: <input type="date" ng-model="report.publication_date"/></label></p>
+			<p class="margintop-large">
+				<button class="button button-default" ng-click="save()">Save changes</button>
+			</p>
+			
+			</form>
+		</div>
+		<div class="width-40p float-left">
+			<section ng-if="!isCreating">
+			
+			<h3>Components</h3>
+			<p><a ng-href="{{report.guidePath}}">Data Retention Guide</a></p>
+			<p><a ng-href="{{report.handbookPath}}">LEA Handbook</a></p>
+			<p><a ng-href="{{report.govRequestsReportPath}}">Government Requests Report</a></p>
+			</section>
+		</div>
+
+	</div>
+	<p>
+		<a class="button button-default" href="#/reports">
+			Back to reports overview
+		</a>
+	</p>
 </div>

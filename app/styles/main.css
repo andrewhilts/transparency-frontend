@@ -1,15 +1,66 @@
 .container {
   max-width: 49.5em;
 }
-a, .link {
-	color: blue;
-	text-decoration: underline;
-}
 .disabled {
 	color: #999;
 }
-td {
-	padding: 0.5rem 0.25rem;
+.f-title {
+	font-size: 3.5rem;
+}
+.textshadow-1 {
+	text-shadow: 2px 2px 2px #CCCCEE;
+}
+.backgroundcolor-pastelblue {
+	background-color: #F2F8FD;
+}
+.tracked, .letterspacing-tracked { letter-spacing: .08em; }
+.trackedtight, .letterspacing-tight { letter-spacing: -0.05em; } /* tachyons bug on my fork */
+hr {
+	border: 0;
+	height: 1px;
+	background-color: #000000;
+	margin: 1.5rem 0;
+}
+/* links */
+a, .link {
+	color: #0074d9;
+	text-decoration: none;
+	cursor: pointer;
+}
+/* input form light defaults */
+input, textarea {
+	color: #333;
+	padding: 0.33rem 0.5rem 0.25rem;
+	background-color: #fafafa;
+	border: 1px solid #ccc;
+}
+/* button */
+button {
+	border: 0;
+	padding: 0;
+	background-color: transparent;
+}
+button:hover {
+	background-color: transparent;
+}
+.button {
+	padding: 1rem;
+	border-radius: 0.25rem;
+	display: inline-block;
+	font-size: 0.9em;
+}
+.button-default {
+	border: 1px solid #bbb;
+	color: #0074d9;
+}
+/* Table style defaults: minimalist */
+th {
+	text-align: left;
+	font-weight: bold;
+	border-bottom: 2px solid #000000;
+}
+td, th {
+	padding: 0.5rem;
 }
 table.dense td,
 table.dense th {

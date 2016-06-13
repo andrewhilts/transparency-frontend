@@ -1,10 +1,12 @@
 <div class="container center">
 	<h2>Government Request Categories</h2>
-	<table class="width-100p">
-	<tr ng-repeat="gov_request_category in gov_request_categories">
-		<td><a ng-href="#/gov-request-categories/{{gov_request_category.category_id}}">{{gov_request_category.name}}</a></td>
-		<td><a class="link" ng-click="deleteCategory(gov_request_category)">Delete</a></td>
-	</tr>
-	</table>
-	<p><a href="#/create-gov-request-category">Create a new Government Request Category</a></p>
+	<div class="backgroundcolor-white padding-medium">
+		<table class="width-100p">
+		<tr ng-repeat="gov_request_category in gov_request_categories">
+			<td><a ng-href="#/gov-request-categories/{{gov_request_category.category_id}}">{{gov_request_category.name}}</a></td>
+			<td><a class="link" ng-click="deleteCategory(gov_request_category)">Delete</a></td>
+		</tr>
+		</table>
+	</div>
+	<p><a class="button button-default" href="#/create-gov-request-category">Create a new Government Request Category</a></p>
 </div>

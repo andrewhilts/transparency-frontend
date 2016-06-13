@@ -1,35 +1,45 @@
 <div class="container center">
-<p><a href="#/reports/{{report.report_id}}">Back to report #{{report.report_id}} overview</a></p>
+
 	<h2 ng-if="isCreating">Create new Law Enforcement Handbook for report #{{report.report_id}}</h2>
 	<h2 ng-if="!isCreating">Law Enforcement Handbook for report #{{report.report_id}}</h2>
-	<section ng-if="!isCreating">
-		<table class="width-100p dense">
-			<tr ng-repeat="category in handbook.categories">
-				<td><label><strong><input type="checkbox" ng-model="category.inclusion_status"> {{category.name}}</strong></label></td>
-				<td ng-repeat="action in category.actions">
-					<button ng-click="showNarrative(action)" ng-if="(category.action_selection_type !== 3)" ng-disabled="!category.inclusion_status"><span ng-if="!action.showNarrative">(i)</span><span ng-if="action.showNarrative">(x)</span></button>
-					<label ng-class="{'disabled': !category.inclusion_status}">
-					<input ng-disabled="!category.inclusion_status" type="checkbox" ng-model="action.inclusion_status" ng-if="(category.action_selection_type===2)"> 
-					<input ng-disabled="!category.inclusion_status" type="radio" ng-model="action.inclusion_status" name="category-{{category.handbook_category_id}}" ng-if="(category.action_selection_type===1)" ng-value="trueValue">
-					<input ng-disabled="!category.inclusion_status" type="checkbox" ng-model="action.inclusion_status" ng-if="(category.action_selection_type===3)" style="display:none"> 
-					<textarea ng-disabled="!category.inclusion_status" class="width-100p height-xlarge" ng-model="action.narrative" ng-if="(category.action_selection_type===3)"></textarea>
-					{{action.name}}</label>
-					<div class="dropdown" ng-if="action.showNarrative">
 
-						<label>
-							Add detail for &ldquo;{{action.name}}&rdquo;
-							<br><textarea ng-disabled="!category.inclusion_status" ng-model="action.narrative" class="width-100p height-xxlarge"></textarea> 
-						</label>
+	<div class="backgroundcolor-white paddinghorizontal-large paddingtop-medium paddingbottom-small">
+
+		<section ng-if="!isCreating">
+
+			<div class="clear-both clearfix marginvertical-medium borderbottom bordercolor-lightgrey paddingbottom-medium" ng-repeat="category in handbook.categories">
+				<div class="width-50p float-left">
+					<label>
+						<strong><input type="checkbox" ng-model="category.inclusion_status"> {{category.name}}</strong>
+					</label>
+				</div>
+				<div class="width-50p float-left">
+					<div class="marginbottom-small" ng-repeat="action in category.actions">
+						<button ng-click="showNarrative(action)" ng-if="(category.action_selection_type !== 3)" ng-disabled="!category.inclusion_status"><span ng-if="!action.showNarrative">(i)</span><span ng-if="action.showNarrative">(x)</span></button>
+						<label ng-class="{'disabled': !category.inclusion_status}">
+						<input ng-disabled="!category.inclusion_status" type="checkbox" ng-model="action.inclusion_status" ng-if="(category.action_selection_type===2)"> 
+						<input ng-disabled="!category.inclusion_status" type="radio" ng-model="action.inclusion_status" name="category-{{category.handbook_category_id}}" ng-if="(category.action_selection_type===1)" ng-value="trueValue">
+						<input ng-disabled="!category.inclusion_status" type="checkbox" ng-model="action.inclusion_status" ng-if="(category.action_selection_type===3)" style="display:none"> 
+						<textarea ng-disabled="!category.inclusion_status" class="width-100p height-xlarge" ng-model="action.narrative" ng-if="(category.action_selection_type===3)"></textarea>
+						{{action.name}}</label>
+						<div class="dropdown" ng-if="action.showNarrative">
+
+							<label>
+								Add detail for &ldquo;{{action.name}}&rdquo;
+								<br><textarea ng-disabled="!category.inclusion_status" ng-model="action.narrative" class="width-100p height-xxlarge"></textarea> 
+							</label>
+						</div>
 					</div>
-				</td>
-			</tr>
-			</table>
-	</section>
-	<hr/>
-	<form>
-	<label>Description of Law Enforcement Handbook<br>
-	<textarea ng-model="handbook.narrative" class="width-100p height-xxlarge"></textarea>
-	</label>
-	<p><button ng-click="save()">Save</button></p>
-	</form>
+				</div>
+			</div>
+		</section>
+		<form>
+			<label>Description of Law Enforcement Handbook<br>
+			<textarea ng-model="handbook.narrative" class="width-100p height-xxlarge"></textarea>
+			</label>
+			<p><button class="button button-default" ng-click="save()">Save</button></p>
+		</form>
+	</div>
+	
+	<p><a class="button button-default" href="#/reports/{{report.report_id}}">Back to report #{{report.report_id}} overview</a></p>
 </div>

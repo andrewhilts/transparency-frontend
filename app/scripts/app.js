@@ -88,6 +88,14 @@ var TransparencyApp = angular.module('TransparencyApp', [
           }]
         }
       })
+      .when('/about', {
+        templateUrl: 'views/about.html',
+        controller: 'AboutCtrl'
+      })
+      .when('/help', {
+        templateUrl: 'views/help.html',
+        controller: 'HelpCtrl'
+      })
       .when('/admin', {
         templateUrl: 'views/admin.html',
         controller: 'AdminCtrl'

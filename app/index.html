@@ -32,33 +32,37 @@ MOSQUITO wants its sweet, sweet data
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body class="backgroundcolor-white">
+  <body class="backgroundcolor-pastelblue sansserif">
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <div class="full-screen" id="loadingScreen"></div>
     <div class="clearfix">
         <header class="navbar">
-            <div class="container center textalign-center">
+            <nav>
+                <div class="borderbottom bordercolor-black10">
+                    <ul class="list padding-none textalign-center">
+                        <li class="display-inlineblock marginhorizontal-medium"><a class="black70 texttransform-uppercase letterspacing-tracked b f5" href="#/about">About</a></li>
+                        <li class="display-inlineblock marginhorizontal-medium"><a class="black70 texttransform-uppercase letterspacing-tracked b f5" href="#/reports">Reports</a></li>
+                        <li class="display-inlineblock marginhorizontal-medium"><a class="black70 texttransform-uppercase letterspacing-tracked b f5" href="#/admin">Setup</a></li>
+                        <li class="display-inlineblock marginhorizontal-medium"><a class="black70 texttransform-uppercase letterspacing-tracked b f5" href="#/help">FAQ</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="center textalign-center">
                 <a class="textdecoration-none black" href="#/">
-                    <h1 class="f-5 paddinghorizontal-small marginbottom-none" class="margintop-small">
-                    DIY Transparency Report
+                    <h1 class="f-title darkestblue letterspacing-tight textshadow-1 paddinghorizontal-small marginvertical-xlarge marginhorziontal-medium">
+                        DIY Transparency Report
                     </h1>
                 </a>
             </div>
-            <nav>
-                <ul style="list-style:none;" class="textalign-center">
-                    <li style="display:inline-block; border-right:1px solid black; padding:0 1em"><a href="#/reports">Reports</a></li>
-                    <li style="display:inline-block; padding:0 1em"><a href="#/admin">Administration</a></li>
-                </ul>
-            </nav>
         </header>
     </div>
 
     <!-- OTHER PAGES GET INSERTED HERE -->
     <div ng-view=""></div>
     
-    <footer class="backgroundcolor-black80 white margintop-xlarge paddinghorizontal-medium paddinghorizontal-none-ns paddingvertical-large clearfix">
+    <footer class="backgroundcolor-black80 white margintop-xlarge paddinghorizontal-medium paddinghorizontal-none-ns paddingvertical-xlarge clearfix">
         <div class="container center">
             <p class="xxxsmall white50 site-policy" translate="wrapper.privacy"></p>
             <p class="xxxsmall white50 site-policy" translate="wrapper.disclaimer"></p>
