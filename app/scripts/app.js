@@ -20,7 +20,8 @@ var TransparencyApp = angular.module('TransparencyApp', [
     'ngSanitize',
     'dataProviderService',
     'pascalprecht.translate',
-    'ngclipboard'
+    'ngclipboard',
+    '720kb.datepicker'
   ])
   .service('cmsStatus', ['$location', function($location){
     var online = false;
@@ -90,11 +91,11 @@ var TransparencyApp = angular.module('TransparencyApp', [
       })
       .when('/about', {
         templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+        // controller: 'AboutCtrl'
       })
       .when('/help', {
         templateUrl: 'views/help.html',
-        controller: 'HelpCtrl'
+        // controller: 'HelpCtrl'
       })
       .when('/admin', {
         templateUrl: 'views/admin.html',
@@ -473,113 +474,29 @@ TransparencyApp.directive('nagSvg', ['$compile',
     }
   }
 ]);
-// TransparencyApp.run(['$http', 'NavCollection', '$timeout', '$location', '$translate', 'envOptions', '$cookies', 'AMIRequest', function($http, NavCollection, $timeout, $location, $translate, envOptions, $cookies, AMIRequest){
-//   // Redirect to landing page if on a dependant stage path
-//   if(AMIRequest.hierarchy.indexOf($location.path().substring(1)) > -1){
-//     $location.path('/');
-//   }
-//   var langCookie = $cookies.get('languageCode');
+TransparencyApp.run(['$translate', '$cookies', function($translate, $cookies){
+  var langCookie = $cookies.get('languageCode');
 
-//   // Sanitize langCookie
-//   if(langCookie){
-//     langCookie = langCookie.replace(/\W/g, '');
-//   }
+  // Sanitize langCookie
+  if(langCookie){
+    langCookie = langCookie.replace(/\W/g, '');
+  }
 
-//     console.log("cookie", langCookie);
-//   if(langCookie){  
-//     $translate.use(langCookie);
-//     console.log($translate.use());
-//   }
-//   else if(navigator.language){
-//     $translate.use(navigator.language.substr(0,2))
-//   }
-//   else{
-//     $translate.use(envOptions.languageCode);
-//   }
-
-//       var stages = [
-//         {
-//           name: "Start",
-//           path: "#/",
-//           id: "start",
-//           icon: "fa fa-home",
-//           restricted: false,
-//           className: "",
-//           target: "_self"
-//         },
-//         {
-//           name: "Operator",
-//           path: "#/operator",
-//           id: "operator",
-//           icon: "fa fa-briefcase",
-//           restricted: true,
-//           className: "",
-//           target: "_self"
-//         },
-//         {
-//           name: "Questions",
-//           path: "#/components",
-//           id: "components",
-//           icon: "fa fa-question-circle",
-//           restricted: true,
-//           className: "",
-//           target: "_self"
-//         },
-//         {
-//           name: "Subject",
-//           path: "#/subject",
-//           id: "subject",
-//           icon: "fa fa-user",
-//           restricted: true,
-//           className: "",
-//           target: "_self"
-//         },
-//         {
-//           name: "Request",
-//           path: "#/request",
-//           id: "request",
-//           icon: "fa fa-file-text",
-//           restricted: true,
-//           className: "",
-//           target: "_self"
-//         }
-//       ];
-//       angular.forEach(stages, function(item){
-//         NavCollection.addNavItem(item.id, item.path, item.name, item.icon, item.restricted, item.className, item.target);
-//       });
-// }]);
+    console.log("cookie", langCookie);
+  if(langCookie){  
+    $translate.use(langCookie);
+    console.log($translate.use());
+  }
+  else if(navigator.language){
+    $translate.use(navigator.language.substr(0,2))
+  }
+  else{
+    $translate.use(envOptions.languageCode);
+  }
+}])
 TransparencyApp.run(['$templateCache', '$http', function($templateCache, $http) {
   $http.get('views/messages.html')
   .then(function(response) {
     $templateCache.put('status-messages', response.data);
   });
 }]);
-// TransparencyApp.run(['urls', 'envOptions', 'AMIRequest', 'cmsStatus', 'dataProviderService', '$interval', '$timeout', function(urls, envOptions, AMIRequest, cmsStatus, dataProviderService, $interval, $timeout) {
-//    dataProviderService.getItem(urls.apiURL(), "/jurisdictions/" + envOptions.jurisdictionID)
-//     .then(function(jurisdiction){
-//       AMIRequest.set('jurisdiction', jurisdiction);
-//       AMIRequest.markAsComplete('jurisdiction');
-//     }).
-//     catch(function(err){
-//       console.log(err);
-//     })
-//   $interval(function(){
-//     if(!cmsStatus.isOnline()){
-//       var randomInt = Math.floor(Math.random() * (100000000 - 0)) + 0;
-//       dataProviderService.request(urls.apiURL(), "/jurisdictions/" + envOptions.jurisdictionID, {"flag": randomInt}, 'GET', null, false)
-//         .success( function(data, status, headers, config) {
-//           cmsStatus.isOnline(true);
-//         })
-//         .error( function(data, status, headers, config) {
-//           cmsStatus.isOnline(false);
-//         });
-//     }
-//   }, 60000);
-//   $timeout(function(){
-//       document.getElementById("loadingScreen").className += ' faded-out';
-//       $timeout(function(){
-//         document.getElementById("loadingScreen").className.replace('faded-out', '');
-//         document.getElementById("loadingScreen").remove();
-//       }, 200);
-//     }, 170);
-// }]);

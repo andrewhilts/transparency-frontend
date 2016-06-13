@@ -1,5 +1,5 @@
 {
-  "name": "Access My Info",
+  "name": "DIYT",
   "version": "0.0.1",
   "dependencies": {
     "underscore": "",
@@ -15,7 +15,8 @@
     "ngclipboard": "~1.1.0",
     "json3": "~3.2.6",
     "es5-shim": "~2.1.0",
-    "momentjs": "~2.6.0"
+    "momentjs": "~2.6.0",
+    "angularjs-datepicker": "^2.1.4"
   },
   "resolutions": {
     "angular": "1.4.8"

@@ -3,18 +3,25 @@
 		
 		<h2 class="margintop-small textalign-center f1" ng-if="isCreating">Create new transparency report</h2>
 		<h2 class="margintop-small textalign-center f1" ng-if="!isCreating">Report {{report.report_id}}</h2>
-
+		<p>
+		DESCRIPTION / INTRO FOR TRANSPARENCY REPORT. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
 		<div class="width-60p float-left">
 			<form>
 
 			<p><label>Author Name: <input ng-model="report.author_name"/ required></label></p>
 
 			<!-- <h3>Reporting Period</h3> -->
-			<p><label>Start Date: <input type="date" ng-model="report.report_period_start" required/></label></p>
-			<p><label>End Date: <input type="date" ng-model="report.report_period_end" required/></label></p>
+			<p><label>Start Date:  <datepicker date-format="yyyy-MM-dd"><input type="text" ng-model="report.report_period_start" required/></datepicker></label></p>
+			<p><label>End Date:  <datepicker date-format="yyyy-MM-dd"><input type="text" ng-model="report.report_period_end" required/></datepicker></label></p>
 
 			<!-- <h3>Publication</h3> -->
-			<p><label>Publication Date: <input type="date" ng-model="report.publication_date"/></label></p>
+			<p><label>Publication Date: <datepicker date-format="yyyy-MM-dd"><input type="text" ng-model="report.publication_date"/></datepicker></label></p>
 			<p class="margintop-large">
 				<button class="button button-default" ng-click="save()">Save changes</button>
 			</p>

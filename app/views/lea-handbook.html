@@ -2,7 +2,14 @@
 
 	<h2 ng-if="isCreating">Create new Law Enforcement Handbook for report #{{report.report_id}}</h2>
 	<h2 ng-if="!isCreating">Law Enforcement Handbook for report #{{report.report_id}}</h2>
-
+	<p>
+		DESCRIPTION / INTRO FOR LEA HANDBOOK. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</p>
 	<div class="backgroundcolor-white paddinghorizontal-large paddingtop-medium paddingbottom-small">
 
 		<section ng-if="!isCreating">
@@ -34,9 +41,14 @@
 			</div>
 		</section>
 		<form>
-			<label>Description of Law Enforcement Handbook<br>
-			<textarea ng-model="handbook.narrative" class="width-100p height-xxlarge"></textarea>
-			</label>
+			<label class="b">Description of Law Enforcement Handbook</label>
+						<br>WHAT SHOULD BE INVOLVED IN DESCRIBING THIS HANDBOOK?? Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			<textarea ng-model="handbook.narrative" class="width-100p height-xxlarge" placeholder="Describe this Handbook"></textarea>
 			<p><button class="button button-default" ng-click="save()" class="button button-default">Save</button></p>
 		</form>
 	</div>
