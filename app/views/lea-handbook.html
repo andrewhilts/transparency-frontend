@@ -3,12 +3,7 @@
 	<h2 ng-if="isCreating">Create new Law Enforcement Handbook for report #{{report.report_id}}</h2>
 	<h2 ng-if="!isCreating">Law Enforcement Handbook for report #{{report.report_id}}</h2>
 	<p>
-		DESCRIPTION / INTRO FOR LEA HANDBOOK. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		A <strong>government request guideline</strong> explains how an organization receives, processes, and discloses information pertaining to government agencies’ requests for information under the organization’s control. Government request guidelines provide sufficient information that government agencies can clarify what kinds of requests a company is willing to receive, and the preferred ways for government agencies to serve such requests on the organization. These guidelines can also, as part of a narrative, explain the kinds of information that are/are not available. These kinds of explanations can be facilitated by organizations also issuing a data retention guide so that government agencies do not spend time requesting access to information that the organization does not, or no longer, retains.
 	</p>
 	<div class="backgroundcolor-white paddinghorizontal-large paddingtop-medium paddingbottom-small">
 
@@ -42,12 +37,9 @@
 		</section>
 		<form>
 			<label class="b">Description of Law Enforcement Handbook</label>
-						<br>WHAT SHOULD BE INVOLVED IN DESCRIBING THIS HANDBOOK?? Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						<p>Organizations may want to explain to both government agencies and its customers or users alike the rationales driving some of its decisions concerning how government requests are received and processed, and explain what kinds of data are available or unavailable given the organization’s practices. Moreover, additional information concerning what an organization will do when overwhelmed with requests might be appropriate, and the organization might even go so far as to direct government agencies towards online or paper forms that they prefer be included when agencies submit requests.</p>
+
+<p>Furthermore, this non-structured information might include licensing information (is the document copyrighted, protected under a Creative Commons license, etc.) as well as a FAQ that provides answers to common questions that readers of government requests guidelines might regularly ask the organization.</p>
 			<textarea ng-model="handbook.narrative" class="width-100p height-xxlarge" placeholder="Describe this Handbook"></textarea>
 			<p><button class="button button-default" ng-click="save()" class="button button-default">Save</button></p>
 		</form>

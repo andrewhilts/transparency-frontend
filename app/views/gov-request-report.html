@@ -3,17 +3,12 @@
 	<h2 class="textalign-center" ng-if="isCreating">Create new Government Requests Report for report #{{report.report_id}}</h2>
 	<h2 class="textalign-center" ng-if="!isCreating">Government Requests Report for report #{{report.report_id}}</h2>
 	<p>
-		DESCRIPTION / INTRO FOR GOV REQUESTS REPORT. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<strong>Government requests reports</strong> document the regularity at which organizations receive, and how they respond to, government agencies’ requests for information. They are often referred to as ‘transparency reports’ by industry groups and members of civil society. These reports demonstrate that an organization is committed to providing data when lawfully required to do so and, in requiring such, operates as a careful steward of its users’ or subscribers’ information. Government requests reports also support a broader social purpose of showcasing to subscribers, to industry colleagues, and to citizens more broadly how often government agencies are using their lawful powers to compel information from organizations.
 	</p>
 	<div class="backgroundcolor-white paddinghorizontal-large paddingtop-medium paddingbottom-small">
 
 		<section ng-if="!isCreating">
-
+			<a class="button button-default" href="http://api.trans.local/transparency-reports/{{report.report_id}}/gov-request-report/csv">Download CSV</a>
 			<table class="width-100p dense">
 				<tr>
 					<th colspan="2">Category</th>
@@ -46,12 +41,9 @@
 
 		<form>
 			<label class="b">Description of Government Requests Report</label>
-			<br>WHAT SHOULD BE INVOLVED IN DESCRIBING THIS REPORT?? Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			<p>Organizations may want to provide additional data concerning the requests that they receive from government agencies. The narrative, or descriptive, section of their report might explain some of the federal or provincial statutory powers that were used to compel information from organizations, any public court challenges where an organization is trying to narrow a government request, or explanations for why some information was provided voluntarily to government agencies. This section might also discuss whether users are notified of government requests and, if not, why not all persons are notified. It might also include, or link to, an organization’s government requests guideline.</p>
+
+			<p>Furthermore, this non-structured information might include licensing information (is the document copyrighted, protected under a Creative Commons license, etc.) as well as a FAQ that provides answers to common questions that readers of government requests guidelines might regularly ask the organization.</p>
 			<textarea ng-model="request_report.narrative" class="width-100p height-xxlarge" placeholder="Describe this report"></textarea>
 			<p><button class="button button-default" ng-click="save()">Save changes</button></p>
 		</form>

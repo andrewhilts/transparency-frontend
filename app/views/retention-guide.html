@@ -3,12 +3,7 @@
 	<h2 class="textalign-center" ng-if="isCreating">Create new Data Retention Guide for report #{{report.report_id}}</h2>
 	<h2 class="textalign-center" ng-if="!isCreating">Data Retention Guide for report #{{report.report_id}}</h2>
 	<p>
-		DESCRIPTION / INTRO FOR DATA RETENTION GUIDE. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<strong>Data retention guides</strong> provides information about how long organizations retain information that is in their possession. Such guides can help companies rapidly identify to third-parties, including users and government agencies, whether they possess information of interest to those parties. Moreover, by possessing a data retention guide an organization can demonstrate its compliance with Canadian privacy law.
 	</p>
 	<p class="b">Note that unchecking a certain data type implies that your organization does not retain that data type.</p>
 	<div class="backgroundcolor-white paddinghorizontal-large paddingtop-medium paddingbottom-small">
@@ -31,14 +26,10 @@
 		</section>
 		<form>
 		<label>
-			<p class="b">Description of Data Retention Guide</p>
 			<label class="b">Description of Data Retention Guide</label>
-						<br>WHAT SHOULD BE INVOLVED IN DESCRIBING THIS GUIDE?? Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						<p>An organization might want to provide non-structured information to readers. Such information might include information on why it specifically retains the information it does, the security or other controls that have been established to delimit access to the information, or explanations of why different business systems require the data outlined in the organizational data retention guideline to provide services to individuals.</p>
+
+<p>Furthermore, this non-structured information might include licensing information (is the document copyrighted, protected under a Creative Commons license, etc.) as well as a FAQ that provides answers to common questions that readers of the data retention guideline might regularly ask the organization.</p>
 			<textarea ng-model="guide.narrative" class="width-100p height-xxlarge" placeholder="Describe this guide"></textarea>
 		</label>
 		<p>
