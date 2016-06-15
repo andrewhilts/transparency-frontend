@@ -53,6 +53,10 @@ button:hover {
 	border: 1px solid #bbb;
 	color: #0074d9;
 }
+.button-small {
+	padding:0.6rem;
+	font-size:0.75rem;
+}
 /* Table style defaults: minimalist */
 th {
 	text-align: left;

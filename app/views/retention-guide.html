@@ -22,6 +22,17 @@
 								<input ng-disabled="!category.inclusion_status" type="checkbox" ng-model="item.inclusion_status"> {{item.name}}
 							</label>
 						</div>
+						<div>
+							<a class="button button-default button-small" ng-show="!category.addingItem" ng-click="category.addingItem = !category.addingItem">Add another item</a>
+							<a class="button button-default button-small" ng-show="category.addingItem" ng-click="category.addingItem = !category.addingItem">Cancel</a>
+							<form ng-show="category.addingItem">
+								<h4>New Item</h4>
+								<label>Name <input ng-model="category.newItem.name"/></label>
+								<br><label>Description<input ng-model="category.newItem.description"/></label>
+								<br><button class="button button-default" ng-click="saveItem(category)">Add</button>
+							</form>
+						</div>
+
 					</div>
 				</div>
 		</section>

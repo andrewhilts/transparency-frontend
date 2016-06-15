@@ -17,6 +17,11 @@ function($scope, $location, guide, report, $route, urls, dataProviderService){
 			inclusion_status: true,
 			complete_status: false	
 		}
+		for(category in $scope.guide.data_categories){
+			category.addingItem = false;
+			category.newItem = {};
+		}
+		console.log($scope.guide.data_categories);
 	}
 
 	$scope.save = function(){
@@ -30,6 +35,23 @@ function($scope, $location, guide, report, $route, urls, dataProviderService){
 	 	}
 	 	request.then(function(report){
  			$route.reload();
+ 		});
+	}
+
+	$scope.saveItem = function(category){
+		console.log(category)
+		var request;
+		var itemJSON = category.newItem;
+		// First we create the item
+		request = dataProviderService.putItem(urls.apiURL(), "/data-categories/" + category.parent_category_id + "/data-items", {}, itemJSON);
+	 	request.then(function(item){
+	 		console.log(item);
+ 			//Now we assign the item to the retention guide
+ 			dataProviderService.putItem(urls.apiURL(), "/transparency-reports/" + report.report_id + "/retention_guide/data-categories/" + category.guide_category_id + "/data-items", {}, item)
+ 			.then(function(assignedItem){
+ 				console.log(assignedItem);
+ 				category.items.push(assignedItem);
+ 			})
  		});
 	}
 	var getGuideAsJSON = function(){
