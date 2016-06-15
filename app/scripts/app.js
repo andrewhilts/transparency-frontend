@@ -80,14 +80,9 @@ var TransparencyApp = angular.module('TransparencyApp', [
   }])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
-      .when('/', { 
-        templateUrl: 'views/report-list.html',
-        controller: 'ReportListCtrl',
-        resolve: {
-          reports: ["dataProviderService", "urls", "envOptions", function(dataProviderService, urls, envOptions) {
-            return dataProviderService.getItem(urls.apiURL(), "/transparency-reports");
-          }]
-        }
+      .when('/', {
+        templateUrl: 'views/about.html',
+        // controller: 'AboutCtrl'
       })
       .when('/about', {
         templateUrl: 'views/about.html',

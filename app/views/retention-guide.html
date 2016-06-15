@@ -8,12 +8,13 @@
 	<p class="b">Note that unchecking a certain data type implies that your organization does not retain that data type.</p>
 	<div class="backgroundcolor-white paddinghorizontal-large paddingtop-medium paddingbottom-small">
 		<section ng-if="!isCreating">
-
+			<a class="button button-default" href="http://api.trans.local/transparency-reports/{{report.report_id}}/retention_guide/html">Download HTML</a>
 				<div class="clear-both clearfix marginvertical-medium borderbottom bordercolor-lightgrey paddingbottom-medium" ng-repeat="category in guide.data_categories">
-					<div class="width-50p float-left">
+					<div class="width-50p paddingright-large float-left">
 						<label>
 							<strong><input type="checkbox" ng-model="category.inclusion_status"> {{category.name}}</strong>
 						</label>
+						<div><small>{{category.description}}</small></div>
 					</div>
 					<div class="width-50p float-left">
 						<div class="marginbottom-small" ng-repeat="item in category.items">

@@ -1,5 +1,5 @@
 <div class="container center">
-	<h2>Law Enforcement Action Categories</h2>
+	<h2>Government Request Handbook Guideline Categories</h2>
 	<table class="width-100p">
 	<tr ng-repeat="lea_category in lea_categories">
 		<td><a ng-href="#/lea-categories/{{lea_category.category_id}}">{{lea_category.name}}</a></td>
@@ -7,4 +7,6 @@
 	</tr>
 	</table>
 	<p><a href="#/create-lea-category" class="button button-default">Create a new Law Enforcement Action Category</a></p>
+	<div class="height-xxxsmall backgroundcolor-lightsilver marginvertical-large width-100p"></div>
+	<a ng-href="#/admin" class="button button-default">Back to setup</a>
 </div>
