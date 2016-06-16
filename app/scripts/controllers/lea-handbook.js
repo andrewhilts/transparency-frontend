@@ -9,6 +9,11 @@ function($scope, $location, handbook, report, $route, urls, dataProviderService)
 		report.publication_date = moment(report.publication_date).toDate();
 		$scope.report = report;
 	}
+	$scope.action_selection_types = [
+      {id: 1, name: 'Single value'},
+      {id: 2, name: 'Multiple value'},
+      {id: 3, name: 'Text value'}
+    ];
 	console.log(handbook);
 	if(handbook !== null){
 		$scope.handbook = handbook;
@@ -18,7 +23,14 @@ function($scope, $location, handbook, report, $route, urls, dataProviderService)
 			inclusion_status: true,
 			complete_status: false	
 		}
+		for(category in $scope.handbook.categories){
+			category.addingItem = false;
+			category.newItem = {};
+		}
+		$scope.addingCategory = false;
 	}
+	$scope.newCategory = {};
+	$scope.selected_action_selection_type = {}
 
 	var oldNarrative;
 
@@ -47,6 +59,43 @@ function($scope, $location, handbook, report, $route, urls, dataProviderService)
 	 	}
 	 	request.then(function(report){
  			$route.reload();
+ 		});
+	}
+	$scope.saveAction = function(category){
+		console.log(category)
+		var request;
+		var actionJSON = category.newAction;
+		// First we create the item
+		request = dataProviderService.putItem(urls.apiURL(), "/lea-categories/" + category.parent_category_id + "/lea-actions", {}, actionJSON);
+	 	request.then(function(action){
+	 		console.log(action, category);
+ 			//Now we assign the item to the retention guide
+ 			dataProviderService.putItem(urls.apiURL(), "/transparency-reports/" + report.report_id + "/law-enforcement-handbook/lea-categories/" + category.handbook_category_id + "/lea-actions", {}, action)
+ 			.then(function(assignedAction){
+ 				console.log(assignedAction);
+ 				category.newAction = {}
+ 				category.actions.push(assignedAction);
+ 			})
+ 		});
+	}
+	$scope.saveCategory = function(){
+		console.log($scope.newCategory)
+		var request;
+		var categoryJSON = $scope.newCategory;
+		categoryJSON.action_selection_type = $scope.selected_action_selection_type.id;
+		console.log(categoryJSON);
+		// First we create the item
+		request = dataProviderService.putItem(urls.apiURL(), "/lea-categories", {}, categoryJSON);
+	 	request.then(function(category){
+	 		console.log(category);
+ 			//Now we assign the item to the retention guide
+ 			dataProviderService.putItem(urls.apiURL(), "/transparency-reports/" + report.report_id + "/law-enforcement-handbook/lea-categories", {}, category)
+ 			.then(function(assignedCategory){
+ 				console.log(assignedCategory);
+ 				$scope.handbook.categories.push(assignedCategory);
+ 				$scope.newCategory = {};
+ 				$scope.selected_action_selection_type = null;
+ 			})
  		});
 	}
 	var getHandbookAsJSON = function(){

@@ -35,6 +35,16 @@
 
 					</div>
 				</div>
+				<div class="clear-both clearfix marginvertical-medium borderbottom bordercolor-lightgrey paddingbottom-medium">
+					<a class="button button-default button-small" ng-show="!addingCategory" ng-click="addingCategory = !addingCategory">Add another category</a>
+					<a class="button button-default button-small" ng-show="addingCategory" ng-click="addingCategory = !addingCategory">Cancel</a>
+					<form ng-show="addingCategory">
+						<h4>New Category</h4>
+						<label>Name <input ng-model="newCategory.name"/></label>
+						<br><label>Description<textarea ng-model="newCategory.description" class="width-100p height-xxlarge"/></textarea></label>
+						<br><button class="button button-default" ng-click="saveCategory()">Add</button>
+					</form>
+				</div>
 		</section>
 		<form>
 		<label>

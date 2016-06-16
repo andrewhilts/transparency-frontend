@@ -21,8 +21,10 @@ function($scope, $location, guide, report, $route, urls, dataProviderService){
 			category.addingItem = false;
 			category.newItem = {};
 		}
+		$scope.addingCategory = false;
 		console.log($scope.guide.data_categories);
 	}
+	$scope.newCategory = {};
 
 	$scope.save = function(){
 		var guideJSON = getGuideAsJSON();
@@ -50,7 +52,25 @@ function($scope, $location, guide, report, $route, urls, dataProviderService){
  			dataProviderService.putItem(urls.apiURL(), "/transparency-reports/" + report.report_id + "/retention_guide/data-categories/" + category.guide_category_id + "/data-items", {}, item)
  			.then(function(assignedItem){
  				console.log(assignedItem);
+ 				category.newItem = {}
  				category.items.push(assignedItem);
+ 			})
+ 		});
+	}
+	$scope.saveCategory = function(){
+		console.log($scope.newCategory)
+		var request;
+		var categoryJSON = $scope.newCategory;
+		// First we create the item
+		request = dataProviderService.putItem(urls.apiURL(), "/data-categories", {}, categoryJSON);
+	 	request.then(function(category){
+	 		console.log(category);
+ 			//Now we assign the item to the retention guide
+ 			dataProviderService.putItem(urls.apiURL(), "/transparency-reports/" + report.report_id + "/retention_guide/data-categories", {}, category)
+ 			.then(function(assignedCategory){
+ 				console.log(assignedCategory);
+ 				$scope.guide.data_categories.push(assignedCategory);
+ 				$scope.newCategory = {};
  			})
  		});
 	}

@@ -20,7 +20,7 @@
 				</tr>
 				<tbody ng-repeat="disclosure_category in request_report.categorized_disclosures" style="border-top:1px solid black">
 					<tr ng-repeat="disclosure in disclosure_category.disclosures">
-					<td ng-if="$first" rowspan="{{disclosure_category.disclosures.length}}">{{disclosure_category.name}}</td>
+					<td ng-if="$first" rowspan="{{disclosure_category.disclosures.length + 1}}">{{disclosure_category.name}}</td>
 					<td>
 						<strong>{{disclosure.name}}</strong>
 						<br><button ng-click="showDescription(disclosure)"><span ng-if="!disclosure.showDescription">(i)</span><span ng-if="disclosure.showDescription">(x)</span></button><div ng-if="disclosure.showDescription" class="dropdown">{{disclosure.description}}</div></td>
@@ -28,6 +28,16 @@
 						<input ng-model="response.count" size=7 pattern="\d+" ng-change="compileTotals()"/>
 					</td>
 					</tr>
+					<tr><td colspan="{{header.length -1}}">
+					<a class="button button-default button-small" ng-show="!disclosure_category.addingDisclosure" ng-click="disclosure_category.addingDisclosure = !disclosure_category.addingDisclosure">Add Type</a>
+					<a class="button button-default button-small" ng-show="disclosure_category.addingDisclosure" ng-click="disclosure_category.addingDisclosure = !disclosure_category.addingDisclosure">Cancel</a>
+					<form ng-show="disclosure_category.addingDisclosure">
+								<h4>New Item</h4>
+								<label>Name <input ng-model="disclosure_category.newRequestType.name"/></label>
+								<br><label>Description<textarea ng-model="disclosure_category.newRequestType.description" class="width-100p height-xlarge"></textarea></label>
+								<br><button class="button button-default" ng-click="saveRequestType(disclosure_category)">Add</button>
+							</form>
+					</td></tr>
 				</tbody>
 				<tbody>
 					<tr style="border-top:1px solid black">

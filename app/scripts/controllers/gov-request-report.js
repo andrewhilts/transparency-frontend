@@ -15,6 +15,11 @@ function($scope, $location, request_report, report, $route, urls, dataProviderSe
 		// for(i in request_report.categories[Object.keys(request_report.categories)][0])
 		$scope.header = request_report.categorized_disclosures[Object.keys(request_report.categorized_disclosures)[0]].disclosures[0].disclosure_responses;
 		$scope.totals = [];
+		for(var key in request_report.categorized_disclosures){
+			$scope.request_report.categorized_disclosures[key].addingRequestType = false;
+			$scope.request_report.categorized_disclosures[key].newRequestType = {};
+		}
+		$scope.addingCategory = false;
 	}else{
 		$scope.request_report = {
 			inclusion_status: true,
@@ -91,6 +96,25 @@ function($scope, $location, request_report, report, $route, urls, dataProviderSe
  			$route.reload();
  		});
 	}
+
+$scope.saveRequestType = function(disclosure_category){
+		console.log(disclosure_category)
+		var request;
+		var requestTypeJSON = disclosure_category.newRequestType;
+		// First we create the type
+		request = dataProviderService.putItem(urls.apiURL(), "/gov-request-categories/" + disclosure_category.category_id + "/gov-request-types", {}, requestTypeJSON);
+	 	request.then(function(requestType){
+	 		console.log(requestType);
+ 			//Now we assign dislosure responses to the type
+ 			dataProviderService.putItem(urls.apiURL(), "/transparency-reports/" + report.report_id + "/gov-request-report/gov-request-categories/" + requestType.category.category_id + "/gov-request-types", {}, requestType)
+ 			.then(function(assignedDisclosure){
+ 				console.log(assignedDisclosure);
+ 				disclosure_category.newDisclosure = {}
+ 				disclosure_category.disclosures.push(assignedDisclosure);
+ 			})
+ 		});
+	}
+
 	var getRequestReportAsJSON = function(){
 		var request_report = {};
 		request_report.inclusion_status = $scope.request_report.inclusion_status;

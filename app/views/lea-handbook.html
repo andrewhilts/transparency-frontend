@@ -32,8 +32,28 @@
 							</label>
 						</div>
 					</div>
+					<div>
+							<a class="button button-default button-small" ng-show="!category.addingAction" ng-click="category.addingAction = !category.addingAction">Add another item</a>
+							<a class="button button-default button-small" ng-show="category.addingAction" ng-click="category.addingAction = !category.addingAction">Cancel</a>
+							<form ng-show="category.addingAction">
+								<h4>New Item</h4>
+								<label>Name <input ng-model="category.newAction.name"/></label>
+								<br><label>Description<input ng-model="category.newAction.narrative"/></label>
+								<br><button class="button button-default" ng-click="saveAction(category)">Add</button>
+							</form>
+						</div>
 				</div>
 			</div>
+			<div class="clear-both clearfix marginvertical-medium borderbottom bordercolor-lightgrey paddingbottom-medium">
+					<a class="button button-default button-small" ng-show="!addingCategory" ng-click="addingCategory = !addingCategory">Add another category</a>
+					<a class="button button-default button-small" ng-show="addingCategory" ng-click="addingCategory = !addingCategory">Cancel</a>
+					<form ng-show="addingCategory">
+						<h4>New Category</h4>
+						<label>Name <input ng-model="newCategory.name"/></label>
+						<p><label>Action selection type: <select ng-model="$parent.selected_action_selection_type" ng-options="type.name for type in action_selection_types" required></select>
+						<br><button class="button button-default" ng-click="saveCategory()">Add</button>
+					</form>
+				</div>
 		</section>
 		<form>
 			<label class="b">Description of Law Enforcement Handbook</label>
