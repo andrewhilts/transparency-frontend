@@ -18,10 +18,31 @@
 						<div><small>{{category.description}}</small></div>
 					</div>
 					<div class="width-50p float-left">
-						<div class="marginbottom-small" ng-repeat="item in category.items">
-							<label ng-class="{'disabled': !category.inclusion_status}">
+						<div class="marginbottom-small clearfix" ng-repeat="item in category.items" ng-class="{'disabled': !category.inclusion_status}">
+							<label>
 								<input ng-disabled="!category.inclusion_status" type="checkbox" ng-model="item.inclusion_status"> {{item.name}}
 							</label>
+							<fieldset class="clearfix"  ng-class="{'disabled': !item.inclusion_status}">
+							<legend>Retention Period</legend>
+							<label class="width-40p float-left">
+								<span class="hidden">Retention Period</span>
+								<input class="width-90p" ng-model="item.retention_period" ng-disabled=" !item.inclusion_status" type="number" size="3"/>
+							</label>
+							<label class="width-40p float-left">
+								<span class="hidden">
+								Retention Period Unit
+								</span>
+								<select ng-disabled=" !item.inclusion_status" ng-model="item.retention_period_unit">
+									<option value=1>Days</option>
+									<option value=2>Weeks</option>
+									<option value=3>Months</option>
+									<option value=4>Years</option>
+									<option value=5>Hours</option>
+									<option value=6>Minutes</option>
+									<option value=7>Seconds</option>
+								</select>
+							</label>
+							</fieldset>
 						</div>
 						<div>
 							<a class="button button-default button-small" ng-show="!category.addingItem" ng-click="category.addingItem = !category.addingItem">Add another item</a>
