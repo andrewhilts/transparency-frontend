@@ -4,6 +4,7 @@ function($scope, $location, report, $route, urls, dataProviderService){
 	$scope.isCreating = true;
 
 	if(report !== null){
+		console.log(report)
 		report.report_period_start = report.report_period_start;
 		report.report_period_end = report.report_period_end;
 		report.publication_date = report.publication_date;
@@ -16,6 +17,7 @@ function($scope, $location, report, $route, urls, dataProviderService){
 
 	$scope.save = function(){
 		var reportJSON = getReportAsJSON();
+		console.log(reportJSON);
 		var request;
 		if($scope.isCreating){
 			request = dataProviderService.putItem(urls.apiURL(), "/transparency-reports", {}, reportJSON);
@@ -33,6 +35,9 @@ function($scope, $location, report, $route, urls, dataProviderService){
 		report.report_period_start = $scope.report.report_period_start;
 		report.report_period_end = $scope.report.report_period_end;
 		report.publication_date = $scope.report.publication_date;
+		report.retention_guide_inclusion_status = $scope.report.retention_guide_inclusion_status;
+		report.government_requests_report_inclusion_status = $scope.report.government_requests_report_inclusion_status;
+		report.law_enforcement_handbook_inclusion_status = $scope.report.law_enforcement_handbook_inclusion_status;
 		return angular.toJson(report)
 	}
 }

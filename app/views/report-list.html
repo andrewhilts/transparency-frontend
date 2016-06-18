@@ -11,18 +11,23 @@
 	<div class="backgroundcolor-white padding-medium">
 		<table class="f5 width-100p">
 			<tr>
-				<th>Report ID</th>
 				<th>Author</th>
 				<th>Report Start Date</th>
 				<th>Report End Date</th>
+				<th>Last updated</th>
+				<th>Status</th>
 				<th colspan="2">Actions</th>
 			</tr>
 			<tr ng-repeat="report in reports">
-				<td>{{report.report_id}}</td>
 				<td>{{report.author_name}}</td>
 				<td>{{report.report_period_start}}</td>
 				<td>{{report.report_period_end}}</td>
-				<td><a ng-href="#/reports/{{report.report_id}}">View</a></td>
+				<td>{{report.date_updated}}</td>
+				<td>
+					<span ng-if="report.complete_status"><em>Completed</em></span>
+					<span ng-if="!report.complete_status"><em>In Progress</em></span>
+				</td>
+				<td><a ng-href="#/reports/{{report.report_id}}">View/Edit</a></td>
 				<td><a class="link" ng-click="deleteReport(report)">Delete</a></td>
 			</tr>
 		</table>

@@ -2,14 +2,14 @@
 
 	<h2 class="textalign-center" ng-if="isCreating">Create new Government Requests Report for report #{{report.report_id}}</h2>
 	<h2 class="textalign-center" ng-if="!isCreating">Government Requests Report for report #{{report.report_id}}</h2>
+	<p><em>Last updated: {{request_report.date_updated}}</em></p>
+<p><a class="button button-default" href="#/reports/{{report.report_id}}">Back to report #{{report.report_id}} overview</a></p>
 	<p>
 		<strong>Government requests reports</strong> document the regularity at which organizations receive, and how they respond to, government agencies’ requests for information. They are often referred to as ‘transparency reports’ by industry groups and members of civil society. These reports demonstrate that an organization is committed to providing data when lawfully required to do so and, in requiring such, operates as a careful steward of its users’ or subscribers’ information. Government requests reports also support a broader social purpose of showcasing to subscribers, to industry colleagues, and to citizens more broadly how often government agencies are using their lawful powers to compel information from organizations.
 	</p>
 	<div class="backgroundcolor-white paddinghorizontal-large paddingtop-medium paddingbottom-small">
 
 		<section ng-if="!isCreating">
-			<a class="button button-default" href="http://api.trans.local/transparency-reports/{{report.report_id}}/gov-request-report/csv">Download CSV</a>
-			<a class="button button-default" href="http://api.trans.local/transparency-reports/{{report.report_id}}/gov-request-report/html">Download HTML</a>
 			<table class="width-100p dense">
 				<tr>
 					<th colspan="2">Category</th>
@@ -56,8 +56,13 @@
 
 			<p>Furthermore, this non-structured information might include licensing information (is the document copyrighted, protected under a Creative Commons license, etc.) as well as a FAQ that provides answers to common questions that readers of government requests guidelines might regularly ask the organization.</p>
 			<textarea ng-model="request_report.narrative" class="width-100p height-xxlarge" placeholder="Describe this report"></textarea>
+			<p><label><input type="checkbox" ng-model="request_report.complete_status"/> Mark requests report as complete.</label></p>
 			<p><button class="button button-default" ng-click="save()">Save changes</button></p>
 		</form>
+			<p>
+				<a class="button button-default" href="http://api.trans.local/transparency-reports/{{report.report_id}}/gov-request-report/csv">Download CSV</a>
+				<a class="button button-default" href="http://api.trans.local/transparency-reports/{{report.report_id}}/gov-request-report/html">Download HTML</a>
+			</p>
 	</div>
 
 	<p><a class="button button-default" href="#/reports/{{report.report_id}}">Back to report #{{report.report_id}} overview</a></p>

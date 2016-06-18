@@ -1,18 +1,19 @@
 <div class="container center">
-
-	<h2 ng-if="isCreating">Create new Law Enforcement Handbook for report #{{report.report_id}}</h2>
-	<h2 ng-if="!isCreating">Law Enforcement Handbook for report #{{report.report_id}}</h2>
+	<h2 ng-if="isCreating">Create new Government Request Handbook for report #{{report.report_id}}</h2>
+	<h2 ng-if="!isCreating">Government Request Handbook for report #{{report.report_id}}</h2>
+	<p><em>Last updated: {{handbook.date_updated}}</em></p>
+<p><a class="button button-default" href="#/reports/{{report.report_id}}">Back to report #{{report.report_id}} overview</a></p>
 	<p>
 		A <strong>government request guideline</strong> explains how an organization receives, processes, and discloses information pertaining to government agencies’ requests for information under the organization’s control. Government request guidelines provide sufficient information that government agencies can clarify what kinds of requests a company is willing to receive, and the preferred ways for government agencies to serve such requests on the organization. These guidelines can also, as part of a narrative, explain the kinds of information that are/are not available. These kinds of explanations can be facilitated by organizations also issuing a data retention guide so that government agencies do not spend time requesting access to information that the organization does not, or no longer, retains.
 	</p>
 	<div class="backgroundcolor-white paddinghorizontal-large paddingtop-medium paddingbottom-small">
 
 		<section ng-if="!isCreating">
-			<a class="button button-default" href="http://api.trans.local/transparency-reports/{{report.report_id}}/law-enforcement-handbook/html">Download HTML</a>
 			<div class="clear-both clearfix marginvertical-medium borderbottom bordercolor-lightgrey paddingbottom-medium" ng-repeat="category in handbook.categories">
 				<div class="width-50p float-left">
 					<label>
 						<strong><input type="checkbox" ng-model="category.inclusion_status"> {{category.name}}</strong>
+						<div><small>{{category.description}}</small></div>
 					</label>
 				</div>
 				<div class="width-50p float-left">
@@ -50,19 +51,22 @@
 					<form ng-show="addingCategory">
 						<h4>New Category</h4>
 						<label>Name <input ng-model="newCategory.name"/></label>
-						<p><label>Action selection type: <select ng-model="$parent.selected_action_selection_type" ng-options="type.name for type in action_selection_types" required></select>
+						<p><label>Description: <textarea ng-model="newCategory.description"/ required class="width-100p height-xlarge"></textarea></label></p>
+						<p><label>Guideline selection type: <select ng-model="$parent.selected_action_selection_type" ng-options="type.name for type in action_selection_types" required></select>
 						<br><button class="button button-default" ng-click="saveCategory()">Add</button>
 					</form>
 				</div>
 		</section>
 		<form>
-			<label class="b">Description of Law Enforcement Handbook</label>
+			<label class="b">Description of Government Request Handbook</label>
 						<p>Organizations may want to explain to both government agencies and its customers or users alike the rationales driving some of its decisions concerning how government requests are received and processed, and explain what kinds of data are available or unavailable given the organization’s practices. Moreover, additional information concerning what an organization will do when overwhelmed with requests might be appropriate, and the organization might even go so far as to direct government agencies towards online or paper forms that they prefer be included when agencies submit requests.</p>
 
 <p>Furthermore, this non-structured information might include licensing information (is the document copyrighted, protected under a Creative Commons license, etc.) as well as a FAQ that provides answers to common questions that readers of government requests guidelines might regularly ask the organization.</p>
 			<textarea ng-model="handbook.narrative" class="width-100p height-xxlarge" placeholder="Describe this Handbook"></textarea>
-			<p><button class="button button-default" ng-click="save()" class="button button-default">Save</button></p>
 		</form>
+			<p><label><input type="checkbox" ng-model="handbook.complete_status"/> Mark handbook as complete.</label></p>
+			<p><button class="button button-default" ng-click="save()" class="button button-default">Save</button></p>
+			<p><a class="button button-default" href="http://api.trans.local/transparency-reports/{{report.report_id}}/law-enforcement-handbook/html">Download HTML</a></p>
 	</div>
 	
 	<p><a class="button button-default" href="#/reports/{{report.report_id}}">Back to report #{{report.report_id}} overview</a></p>

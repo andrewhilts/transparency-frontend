@@ -33,6 +33,7 @@ function($scope, $location, lea_category, lea_actions, $route, urls, dataProvide
 	var getLEACategoryAsJSON = function(){
 		var lea_category = {};
 		lea_category.name = $scope.lea_category.name;
+		lea_category.description = $scope.lea_category.description;
 		lea_category.action_selection_type = $scope.selected_action_selection_type.id;
 		return angular.toJson(lea_category)
 	}

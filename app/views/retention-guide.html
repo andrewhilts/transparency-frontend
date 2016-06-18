@@ -2,13 +2,14 @@
 
 	<h2 class="textalign-center" ng-if="isCreating">Create new Data Retention Guide for report #{{report.report_id}}</h2>
 	<h2 class="textalign-center" ng-if="!isCreating">Data Retention Guide for report #{{report.report_id}}</h2>
+	<p><em>Last updated: {{guide.date_updated}}</em></p>
+<p><a class="button button-default" href="#/reports/{{report.report_id}}">Back to report #{{report.report_id}} overview</a></p>
 	<p>
 		<strong>Data retention guides</strong> provides information about how long organizations retain information that is in their possession. Such guides can help companies rapidly identify to third-parties, including users and government agencies, whether they possess information of interest to those parties. Moreover, by possessing a data retention guide an organization can demonstrate its compliance with Canadian privacy law.
 	</p>
 	<p class="b">Note that unchecking a certain data type implies that your organization does not retain that data type.</p>
 	<div class="backgroundcolor-white paddinghorizontal-large paddingtop-medium paddingbottom-small">
 		<section ng-if="!isCreating">
-			<a class="button button-default" href="http://api.trans.local/transparency-reports/{{report.report_id}}/retention_guide/html">Download HTML</a>
 				<div class="clear-both clearfix marginvertical-medium borderbottom bordercolor-lightgrey paddingbottom-medium" ng-repeat="category in guide.data_categories">
 					<div class="width-50p paddingright-large float-left">
 						<label>
@@ -54,9 +55,11 @@
 <p>Furthermore, this non-structured information might include licensing information (is the document copyrighted, protected under a Creative Commons license, etc.) as well as a FAQ that provides answers to common questions that readers of the data retention guideline might regularly ask the organization.</p>
 			<textarea ng-model="guide.narrative" class="width-100p height-xxlarge" placeholder="Describe this guide"></textarea>
 		</label>
+		<p><label><input type="checkbox" ng-model="guide.complete_status"/> Mark retention guide as complete.</label></p>
 		<p>
 			<button class="button button-default" ng-click="save()">Save changes</button>
 		</p>
+		<p><a class="button button-default" href="http://api.trans.local/transparency-reports/{{report.report_id}}/retention_guide/html">Download HTML</a></p>
 		</form>
 	</div>
 

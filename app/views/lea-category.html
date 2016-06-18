@@ -5,7 +5,8 @@
 	<h2 ng-if="!isCreating">Guideline {{lea_category.category_id}}</h2>
 
 	<p><label>Name: <input ng-model="lea_category.name"/ required></label></p>
-	<p><label>Action selection type: <select ng-model="selected_action_selection_type" ng-options="type.name for type in action_selection_types" required>
+	<p><label>Description: <textarea ng-model="lea_category.description"/ required class="width-100p height-xxlarge"></textarea></label></p>
+	<p><label>Guideline selection type: <select ng-model="selected_action_selection_type" ng-options="type.name for type in action_selection_types" required>
 	</select></label></p>
 
 	<p><button ng-click="save()" class="button button-default">Save</button></p>
