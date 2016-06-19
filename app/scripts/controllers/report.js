@@ -26,9 +26,13 @@ function($scope, $location, report, $route, urls, dataProviderService){
 	 		request = dataProviderService.postItem(urls.apiURL(), "/transparency-reports/" + $scope.report.report_id, {}, reportJSON);
 	 	}
 	 	request.then(function(report){
- 			$location.path('/reports/');
+	 		$scope.unSavedChanges = false;
  		});
 	}
+	$scope.$on("$locationChangeStart", function(event) {
+      if ($scope.unSavedChanges && !confirm('You have unsaved changes, continue?'))
+        event.preventDefault();
+    });
 	var getReportAsJSON = function(){
 		var report = {};
 		report.author_name = $scope.report.author_name;
@@ -40,5 +44,10 @@ function($scope, $location, report, $route, urls, dataProviderService){
 		report.law_enforcement_handbook_inclusion_status = $scope.report.law_enforcement_handbook_inclusion_status;
 		return angular.toJson(report)
 	}
+	$scope.$watch('report', function(newReport, oldReport){
+		if(oldReport !== newReport){
+			$scope.unSavedChanges = true;
+		}
+	}, true)
 }
 ]);
