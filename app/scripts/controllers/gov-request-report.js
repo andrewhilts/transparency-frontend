@@ -93,9 +93,15 @@ function($scope, $location, request_report, report, $route, urls, dataProviderSe
 	 		request = dataProviderService.postItem(urls.apiURL(), "/transparency-reports/" + report.report_id + "/gov-request-report", {}, requestReportJSON);
 	 	}
 	 	request.then(function(report){
+ 			$scope.unSavedChanges = false;
  			$route.reload();
  		});
 	}
+
+$scope.$on("$locationChangeStart", function(event) {
+      if ($scope.unSavedChanges && !confirm('You have unsaved changes, continue?'))
+        event.preventDefault();
+    });
 
 $scope.saveRequestType = function(disclosure_category){
 		console.log(disclosure_category)
@@ -124,6 +130,10 @@ $scope.saveRequestType = function(disclosure_category){
 		console.log(request_report);
 		return angular.toJson(request_report)
 	}
-
+	$scope.$watch('request_report', function(newReport, oldReport){
+		if(oldReport !== newReport){
+			$scope.unSavedChanges = true;
+		}
+	}, true)
 }
 ]);

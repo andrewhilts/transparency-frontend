@@ -1,12 +1,12 @@
 <div class="container center">
-	<h2>Data Categories</h2>
+	<h2>Data Retention Categories</h2>
 	<table class="width-100p">
 	<tr ng-repeat="category in categories">
 		<td><a ng-href="#/categories/{{category.category_id}}">{{category.name}}</a></td>
 		<td><a class="link" ng-click="deleteCategory(category)">Delete</a></td>
 	</tr>
 	</table>
-	<p><a href="#/create-category" class="button button-default">Create a new Data Category</a></p>
+	<p><a href="#/create-category" class="button button-default">Create a new Data Retention Category</a></p>
 	<div class="height-xxxsmall backgroundcolor-lightsilver marginvertical-large width-100p"></div>
-	<a ng-href="#/setup" class="button button-default">Back to setup</a>
+	<a ng-href="#/admin" class="button button-default">Back to setup</a>
 </div>

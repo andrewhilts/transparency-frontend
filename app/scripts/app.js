@@ -81,11 +81,19 @@ var TransparencyApp = angular.module('TransparencyApp', [
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/about.html',
+        templateUrl: 'views/main.html',
+        // controller: 'AboutCtrl'
+      })
+      .when('/main', {
+        templateUrl: 'views/main.html',
         // controller: 'AboutCtrl'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
+        // controller: 'AboutCtrl'
+      })
+      .when('/resources', {
+        templateUrl: 'views/resources.html',
         // controller: 'AboutCtrl'
       })
       .when('/help', {

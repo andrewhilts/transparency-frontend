@@ -36,9 +36,15 @@ function($scope, $location, guide, report, $route, urls, dataProviderService){
 	 		request = dataProviderService.postItem(urls.apiURL(), "/transparency-reports/" + report.report_id + "/retention_guide", {}, guideJSON);
 	 	}
 	 	request.then(function(report){
+ 			$scope.unSavedChanges = false;
  			$route.reload();
  		});
 	}
+
+	$scope.$on("$locationChangeStart", function(event) {
+      if ($scope.unSavedChanges && !confirm('You have unsaved changes, continue?'))
+        event.preventDefault();
+    });
 
 	$scope.saveItem = function(category){
 		console.log(category)
@@ -83,5 +89,10 @@ function($scope, $location, guide, report, $route, urls, dataProviderService){
 		console.log(guide);
 		return angular.toJson(guide)
 	}
+	$scope.$watch('guide', function(newGuide, oldGuide){
+		if(oldGuide !== newGuide){
+			$scope.unSavedChanges = true;
+		}
+	}, true)
 }
 ]);

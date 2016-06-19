@@ -10,6 +10,9 @@
 	<p class="b">Note that unchecking a certain data type implies that your organization does not retain that data type.</p>
 	<div class="backgroundcolor-white paddinghorizontal-large paddingtop-medium paddingbottom-small">
 		<section ng-if="!isCreating">
+		<p>
+			<button class="button button-default" ng-click="save()" ng-class="{'plssave': unSavedChanges}"><span ng-if="unSavedChanges">Save changes</span><span ng-if="!unSavedChanges">Up-to-date</span></button>
+		</p>
 				<div class="clear-both clearfix marginvertical-medium borderbottom bordercolor-lightgrey paddingbottom-medium" ng-repeat="category in guide.data_categories">
 					<div class="width-50p paddingright-large float-left">
 						<label>
@@ -33,10 +36,10 @@
 								Retention Period Unit
 								</span>
 								<select ng-disabled=" !item.inclusion_status" ng-model="item.retention_period_unit">
-									<option value=1>Days</option>
-									<option value=2>Weeks</option>
-									<option value=3>Months</option>
-									<option value=4>Years</option>
+									<option value=1>Years</option>
+									<option value=2>Months</option>
+									<option value=3>Weeks</option>
+									<option value=4>Days</option>
 									<option value=5>Hours</option>
 									<option value=6>Minutes</option>
 									<option value=7>Seconds</option>
@@ -78,9 +81,9 @@
 		</label>
 		<p><label><input type="checkbox" ng-model="guide.complete_status"/> Mark retention guide as complete.</label></p>
 		<p>
-			<button class="button button-default" ng-click="save()">Save changes</button>
+			<button class="button button-default" ng-click="save()" ng-class="{'plssave': unSavedChanges}"><span ng-if="unSavedChanges">Save changes</span><span ng-if="!unSavedChanges">Up-to-date</span></button>
 		</p>
-		<p><a class="button button-default" href="http://api.trans.local/transparency-reports/{{report.report_id}}/retention_guide/html">Download HTML</a></p>
+		<p><a class="button button-default" ng-click="save()" href="http://api.trans.local/transparency-reports/{{report.report_id}}/retention_guide/html"><span ng-if="unSavedChanges">Save &amp; </span>Download HTML</a></p>
 		</form>
 	</div>
 

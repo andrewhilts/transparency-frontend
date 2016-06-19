@@ -9,6 +9,9 @@
 	<div class="backgroundcolor-white paddinghorizontal-large paddingtop-medium paddingbottom-small">
 
 		<section ng-if="!isCreating">
+		<p>
+			<button class="button button-default" ng-click="save()" ng-class="{'plssave': unSavedChanges}"><span ng-if="unSavedChanges">Save changes</span><span ng-if="!unSavedChanges">Up-to-date</span></button>
+		</p>
 			<div class="clear-both clearfix marginvertical-medium borderbottom bordercolor-lightgrey paddingbottom-medium" ng-repeat="category in handbook.categories">
 				<div class="width-50p float-left">
 					<label>
@@ -65,8 +68,8 @@
 			<textarea ng-model="handbook.narrative" class="width-100p height-xxlarge" placeholder="Describe this Handbook"></textarea>
 		</form>
 			<p><label><input type="checkbox" ng-model="handbook.complete_status"/> Mark handbook as complete.</label></p>
-			<p><button class="button button-default" ng-click="save()" class="button button-default">Save</button></p>
-			<p><a class="button button-default" href="http://api.trans.local/transparency-reports/{{report.report_id}}/law-enforcement-handbook/html">Download HTML</a></p>
+			<p><button class="button button-default" ng-click="save()" ng-class="{'plssave': unSavedChanges}"><span ng-if="unSavedChanges">Save changes</span><span ng-if="!unSavedChanges">Up-to-date</span></button></p>
+			<p><a class="button button-default" ng-click="save()" href="http://api.trans.local/transparency-reports/{{report.report_id}}/law-enforcement-handbook/html"><span ng-if="unSavedChanges">Save &amp; </span>Download HTML</a></p>
 	</div>
 	
 	<p><a class="button button-default" href="#/reports/{{report.report_id}}">Back to report #{{report.report_id}} overview</a></p>

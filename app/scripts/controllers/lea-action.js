@@ -29,6 +29,7 @@ function($scope, $location, lea_category, lea_action, $route, urls, dataProvider
 		lea_action.name = $scope.lea_action.name;
 		lea_action.narrative = $scope.lea_action.narrative;
 		lea_action.narrative_label = $scope.lea_action.narrative_label;
+		lea_action.inclusion_status_default = $scope.lea_action.inclusion_status_default;
 		return angular.toJson(lea_action)
 	}
 

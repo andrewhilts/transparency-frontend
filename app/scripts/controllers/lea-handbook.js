@@ -58,9 +58,14 @@ function($scope, $location, handbook, report, $route, urls, dataProviderService)
 	 		request = dataProviderService.postItem(urls.apiURL(), "/transparency-reports/" + report.report_id + "/law-enforcement-handbook", {}, handbookJSON);
 	 	}
 	 	request.then(function(report){
+ 			$scope.unSavedChanges = false;
  			$route.reload();
  		});
 	}
+	$scope.$on("$locationChangeStart", function(event) {
+      if ($scope.unSavedChanges && !confirm('You have unsaved changes, continue?'))
+        event.preventDefault();
+    });
 	$scope.saveAction = function(category){
 		console.log(category)
 		var request;
@@ -107,5 +112,10 @@ function($scope, $location, handbook, report, $route, urls, dataProviderService)
 		console.log(handbook);
 		return angular.toJson(handbook)
 	}
+	$scope.$watch('handbook', function(newHandbook, oldHandbook){
+		if(oldHandbook !== newHandbook){
+			$scope.unSavedChanges = true;
+		}
+	}, true)
 }
 ]);
