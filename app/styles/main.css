@@ -93,3 +93,7 @@ overflow:hidden;}
 	color: #9F6000;
     background-color: #FEEFB3;
 }
+.button:hover, button:hover, input[type="button"]:hover, input[type="reset"]:hover,
+button:focus, input[type="button"]:focus, input[type="reset"]:focus {
+	background: rgb(240,240,240);
+}
