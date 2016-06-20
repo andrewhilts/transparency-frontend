@@ -27,6 +27,9 @@ function($scope, $location, report, $route, urls, dataProviderService){
 	 	}
 	 	request.then(function(report){
 	 		$scope.unSavedChanges = false;
+	 		if($scope.isCreating){
+	 			$location.path('/reports/' + report.report_id);
+	 		}
  		});
 	}
 	$scope.$on("$locationChangeStart", function(event) {
