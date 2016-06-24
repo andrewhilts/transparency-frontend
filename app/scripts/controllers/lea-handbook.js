@@ -34,8 +34,8 @@ function($scope, $location, handbook, report, $route, urls, dataProviderService)
 
 	var oldNarrative;
 
-	$scope.showNarrative = function(narrative){
-		console.log(narrative)
+	$scope.showNarrative = function(narrative, thing){
+		var body = document.getElementsByTagName('body')[0];
 		if(oldNarrative == narrative && oldNarrative.showNarrative === true){
 			oldNarrative.showNarrative = false;
 		}
@@ -45,6 +45,12 @@ function($scope, $location, handbook, report, $route, urls, dataProviderService)
 			}
 			narrative.showNarrative = true;
 			oldNarrative = narrative;
+		}
+	}
+
+	$scope.closeNarrative = function($event){
+		if($event.target.className !== "dropdown" && $event.target.className !== "toggler"){
+			oldNarrative.showNarrative = false;
 		}
 	}
 

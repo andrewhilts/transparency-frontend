@@ -65,25 +65,24 @@
 					<a class="button button-default button-small" ng-show="addingCategory" ng-click="addingCategory = !addingCategory">Cancel</a>
 					<form ng-show="addingCategory">
 						<h4>New Category</h4>
-						<label>Name <input ng-model="newCategory.name"/></label>
-						<br><label>Description<textarea ng-model="newCategory.description" class="width-100p height-xxlarge"/></textarea></label>
+						<label>Name <input ng-model="newCategory.name"></label>
+						<p><label>Description: <textarea ng-model="newCategory.description"/ required class="width-100p height-xlarge"></textarea></label>
 						<br><button class="button button-default" ng-click="saveCategory()">Add</button>
+						</p>
 					</form>
 				</div>
 		</section>
 		<form>
-		<label>
 			<label class="b">Description of Data Retention Guide</label>
 						<p>An organization might want to provide non-structured information to readers. Such information might include information on why it specifically retains the information it does, the security or other controls that have been established to delimit access to the information, or explanations of why different business systems require the data outlined in the organizational data retention guideline to provide services to individuals.</p>
 
 <p>Furthermore, this non-structured information might include licensing information (is the document copyrighted, protected under a Creative Commons license, etc.) as well as a FAQ that provides answers to common questions that readers of the data retention guideline might regularly ask the organization.</p>
 			<textarea ng-model="guide.narrative" class="width-100p height-xxlarge" placeholder="Describe this guide"></textarea>
-		</label>
 		<p><label><input type="checkbox" ng-model="guide.complete_status"/> Mark retention guide as complete.</label></p>
 		<p>
 			<button class="button button-default" ng-click="save()" ng-class="{'plssave': unSavedChanges}"><span ng-if="unSavedChanges">Save changes</span><span ng-if="!unSavedChanges">Up-to-date</span></button>
 		</p>
-		<p><a class="button button-default" ng-click="save()" href="http://api.trans.local/transparency-reports/{{report.report_id}}/retention_guide/html"><span ng-if="unSavedChanges">Save &amp; </span>Download HTML</a></p>
+		<p><a class="button button-default" ng-click="save()" href="http://api.diy-transparency.local/transparency-reports/{{report.report_id}}/retention_guide/html"><span ng-if="unSavedChanges">Save &amp; </span>Download HTML</a></p>
 		</form>
 	</div>
 

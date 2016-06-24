@@ -39,7 +39,7 @@
 			</span>
 			<br><small>A data retention guide provides information about how long organizations retain information that is in their possession.</small>
 			<br><span ng-if="report.retention_guide_id"><label class="small b"><input ng-model="report.retention_guide_inclusion_status" type="checkbox"/> Include in report</label></span>
-			<span ng-if="report.retention_guide_inclusion_status && report.retention_guide_complete_status"><a class="button button-default button-small" href="http://api.trans.local/transparency-reports/{{report.report_id}}/retention_guide/html">Download HTML</a></span>
+			<span ng-if="report.retention_guide_inclusion_status && report.retention_guide_complete_status"><a class="button button-default button-small" href="http://api.diy-transparency.local/transparency-reports/{{report.report_id}}/retention_guide/html">Download HTML</a></span>
 			</p>
 			<p>
 			<a class="button button-default button-small" ng-if="!report.law_enforcement_handbook_id" ng-href="{{report.handbookPath}}">Create Government Request Guidelines</a>
@@ -53,7 +53,7 @@
 			<label class="small b" ><input ng-model="report.law_enforcement_handbook_inclusion_status" type="checkbox"/> Include in report</label>
 			</span>
 			<span ng-if="report.law_enforcement_handbook_complete_status && report.law_enforcement_handbook_inclusion_status">
-				<a class="button button-default button-small" href="http://api.trans.local/transparency-reports/{{report.report_id}}/law-enforcement-handbook/html">Download HTML</a>
+				<a class="button button-default button-small" href="http://api.diy-transparency.local/transparency-reports/{{report.report_id}}/law-enforcement-handbook/html">Download HTML</a>
 			</span>
 			</p>
 			<p>
@@ -67,8 +67,8 @@
 			<span ng-if="report.government_requests_report_id"><label class="small b"><input ng-model="report.government_requests_report_inclusion_status" type="checkbox"/> Include in report</label>
 			</span>
 			<span ng-if="report.government_requests_report_inclusion_status && report.government_requests_report_complete_status">
-				<a class="button button-default button-small" href="http://api.trans.local/transparency-reports/{{report.report_id}}/gov-request-report/csv">Download CSV</a>
-				<a class="button button-default button-small" href="http://api.trans.local/transparency-reports/{{report.report_id}}/gov-request-report/html">Download HTML</a>
+				<a class="button button-default button-small" href="http://api.diy-transparency.local/transparency-reports/{{report.report_id}}/gov-request-report/csv">Download CSV</a>
+				<a class="button button-default button-small" href="http://api.diy-transparency.local/transparency-reports/{{report.report_id}}/gov-request-report/html">Download HTML</a>
 			</span>
 			</p>
 			</section>

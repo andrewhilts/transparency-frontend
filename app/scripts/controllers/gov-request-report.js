@@ -62,6 +62,17 @@ function($scope, $location, request_report, report, $route, urls, dataProviderSe
 		}
 	}
 
+	$scope.closeDropdown = function($event){
+		if($event.target.className !== "dropdown" && $event.target.className !== "toggler"){
+			if(oldDescription){
+				oldDescription.showDescription = false;
+			}
+			if(oldHeaderDescription){
+				oldHeaderDescription.showDescription = false;
+			}
+		}
+	}
+
 	var numberWithCommas=function(x) {
     	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}

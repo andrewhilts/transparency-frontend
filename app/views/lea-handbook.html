@@ -1,4 +1,4 @@
-<div class="container center">
+<div class="container center" ng-click="closeNarrative($event)">
 	<h2 ng-if="isCreating">Create new Government Request Handbook for report #{{report.report_id}}</h2>
 	<h2 ng-if="!isCreating">Government Request Handbook for report #{{report.report_id}}</h2>
 	<p><em>Last updated: {{handbook.date_updated}}</em></p>
@@ -21,13 +21,13 @@
 				</div>
 				<div class="width-50p float-left">
 					<div class="marginbottom-small" ng-repeat="action in category.actions">
-						<button ng-click="showNarrative(action)" ng-if="(category.action_selection_type !== 3)" ng-disabled="!category.inclusion_status"><span ng-if="!action.showNarrative">(i)</span><span ng-if="action.showNarrative">(x)</span></button>
+						<button ng-click="showNarrative(action)" ng-if="(category.action_selection_type !== 3)" ng-disabled="!category.inclusion_status"><span class="toggler" ng-if="!action.showNarrative">(i)</span><span class="toggler" ng-if="action.showNarrative">(x)</span></button>
 						<label ng-class="{'disabled': !category.inclusion_status}">
 						<input ng-disabled="!category.inclusion_status" type="checkbox" ng-model="action.inclusion_status" ng-if="(category.action_selection_type===2)"> 
 						<input ng-disabled="!category.inclusion_status" type="radio" ng-model="action.inclusion_status" name="category-{{category.handbook_category_id}}" ng-if="(category.action_selection_type===1)" ng-value="trueValue">
 						<input ng-disabled="!category.inclusion_status" type="checkbox" ng-model="action.inclusion_status" ng-if="(category.action_selection_type===3)" style="display:none"> 
 						<textarea ng-disabled="!category.inclusion_status" class="width-100p height-xlarge" ng-model="action.narrative" ng-if="(category.action_selection_type===3)"></textarea>
-						{{action.name}}</label>
+						{{action.name}}: {{action.showNarrative}}</label>
 						<div class="dropdown" ng-if="action.showNarrative">
 
 							<label>
@@ -69,7 +69,7 @@
 		</form>
 			<p><label><input type="checkbox" ng-model="handbook.complete_status"/> Mark handbook as complete.</label></p>
 			<p><button class="button button-default" ng-click="save()" ng-class="{'plssave': unSavedChanges}"><span ng-if="unSavedChanges">Save changes</span><span ng-if="!unSavedChanges">Up-to-date</span></button></p>
-			<p><a class="button button-default" ng-click="save()" href="http://api.trans.local/transparency-reports/{{report.report_id}}/law-enforcement-handbook/html"><span ng-if="unSavedChanges">Save &amp; </span>Download HTML</a></p>
+			<p><a class="button button-default" ng-click="save()" href="http://api.diy-transparency.local/transparency-reports/{{report.report_id}}/law-enforcement-handbook/html"><span ng-if="unSavedChanges">Save &amp; </span>Download HTML</a></p>
 	</div>
 	
 	<p><a class="button button-default" href="#/reports/{{report.report_id}}">Back to report #{{report.report_id}} overview</a></p>
